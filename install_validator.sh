@@ -7,8 +7,10 @@ curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v0.16.5/install/s
 
 #as a prerequisite you must attach a disk and mout it in /validator_data/
 #sudo fdisk /dev/sdb; sudo mkfs.ext4 /dev/sdb1; sudo mount /dev/sdb1 /validator_data/
-#sudo fdisk /dev/nvme1n1; sudo mkfs.ext4 /dev/nvme1n1p1; sudo mount /dev/nvme1n1p1 /validator_data/
+#sudo fdisk /dev/nvme1n1; sudo mkfs.ext4 /dev/nvme1n1p1; 
+sudo mkdir /validator_data
 #sudo chown ubuntu /validator_data/
+sudo mount /dev/nvme1n1p1 /validator_data/
 
 solana-install init --data-dir /validator_data/
 

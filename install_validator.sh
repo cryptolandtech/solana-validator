@@ -13,6 +13,7 @@ sudo mkdir /validator_data
 sudo mount /dev/nvme1n1p1 /validator_data/
 
 solana-install init --data-dir /validator_data/
+export PATH="/validator_data/active_release/bin:$PATH"
 
 solana-keygen new -o /validator_data/validator-keypair.json
 clear-config.sh

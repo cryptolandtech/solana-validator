@@ -23,5 +23,19 @@ solana-wallet -k /validator_data/validator-keypair.json airdrop 800000
 sed -i 's/\$program "\${args\[@\]}"/pm2 start \$program -- "\${args\[@\]}"/g' /validator_data/active_release/multinode-demo/fullnode.sh
 
 #should use tds.solana.com 
-validator.sh --identity /validator_data/validator-keypair.json --no-airdrop --stake 500000 testnet.solana.com
+##validator.sh --identity /validator_data/validator-keypair.json --no-airdrop --stake 500000 testnet.solana.com
+cat <<EOF >> ecosystem.config.js
+module.exports = {
+  apps : [{
+    name: 'validator',
+    script: '/validator_data/active_release/multinode-demo/fullnode.sh',
 
+    // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
+    args: ["--validator", "--identity", "/validator_data/validator-keypair.json", "--stake", "500000", "testnet.solana.com"],
+    instances: 1,
+    autorestart: true,
+    watch: false,
+    //max_memory_restart: '1G',
+  }],
+};
+EOF

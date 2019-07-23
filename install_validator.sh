@@ -37,8 +37,7 @@ module.exports = {
   apps : [{
     name: "validator",
     script: "fullnode.sh",
-    cwd: "/validator_data/active_release/multinode-demo/"
-    // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
+    cwd: "/validator_data/active_release/multinode-demo/",
     args: ["--validator", "--identity", "/validator_data/validator-keypair.json", "--stake", "500000", "testnet.solana.com"],
     error_file: "/var/log/pm2/validator-err.log",
     out_file: "/var/log/pm2/validator-out.log",

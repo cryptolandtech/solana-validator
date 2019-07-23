@@ -31,17 +31,17 @@ clear-config.sh
 cat <<EOF >> ecosystem.config.js
 module.exports = {
   apps : [{
-    name: 'validator',
-    script: '/validator_data/active_release/multinode-demo/fullnode.sh',
-
+    name: "validator",
+    script: "fullnode.sh",
+    cwd: "/validator_data/active_release/multinode-demo/"
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
     args: ["--validator", "--identity", "/validator_data/validator-keypair.json", "--stake", "500000", "testnet.solana.com"],
-    "error_file": "/var/log/pm2/validator-err.log",
-    "out_file": "/var/log/pm2/validator-out.log",
-    "merge_logs": true,
+    error_file: "/var/log/pm2/validator-err.log",
+    out_file: "/var/log/pm2/validator-out.log",
+    merge_logs: true,
     instances: 1,
     autorestart: true,
-    "min_uptime": "100s",
+    min_uptime: "100s",
     watch: false,
     //max_memory_restart: '1G',
   }],

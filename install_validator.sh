@@ -36,9 +36,13 @@ cat <<EOF >> ecosystem.config.js
 module.exports = {
   apps : [{
     name: "validator",
-    script: "fullnode.sh",
-    cwd: "/validator_data/active_release/multinode-demo/",
-    args: ["--validator", "--identity", "/validator_data/validator-keypair.json", "--stake", "500000", "testnet.solana.com"],
+    //for staring without solana-install
+    //script: "fullnode.sh",
+    //cwd: "/validator_data/active_release/multinode-demo/",
+    //args: ["--validator", "--identity", "/validator_data/validator-keypair.json", "--stake", "500000", "testnet.solana.com"],
+    script: "solana-install",
+    cwd: "/validator_data/active_release/bin/",
+    args: ["run", "validator.sh", "--", "--identity", "/validator_data/validator-keypair.json", "--stake", "500000", "testnet.solana.com"],
     error_file: "/var/log/pm2/validator-err.log",
     out_file: "/var/log/pm2/validator-out.log",
     merge_logs: true,
@@ -49,6 +53,7 @@ module.exports = {
     //max_memory_restart: '1G',
   }],
 };
+
 EOF
 
 pm2 start

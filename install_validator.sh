@@ -32,7 +32,7 @@ module.exports = {
     //for staring without solana-install
     script: "fullnode.sh",
     cwd: "/home/ubuntu/.local/share/solana/install/active_release/multinode-demo/",
-    args: ["--validator", "--identity", "~/validator-keypair.json", "--config-dir", "~/validator-config", "--rpc-port", "8899", "--poll-for-new-genesis-block", "testnet.solana.com"],
+    args: ["--validator", "--identity", "~/validator-config/validator-keypair.json", "--config-dir", "~/validator-config", "--rpc-port", "8899", "--poll-for-new-genesis-block", "testnet.solana.com"],
     //script: "solana-install",
     //cwd: "/validator_data/active_release/bin/",
     //args: ["run", "validator.sh", "--", "--identity", "/validator_data/validator-keypair.json", "--stake", "500000", "testnet.solana.com"],

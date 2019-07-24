@@ -46,3 +46,24 @@ module.exports = {
 EOF
 
 pm2 start
+
+
+#the above is not working after 0.1.16 release. do the following
+
+#!/bin/bash
+sudo apt-get update
+sudo apt-get install -y npm
+sudo npm install pm2@latest -g
+
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v0.16.6/install/solana-install-init.sh | sh -s
+export PATH="/home/ubuntu/.local/share/solana/install/active_release/bin:$PATH"
+
+#as a prerequisite you must attach a disk and mout it in ~/validator-config
+#sudo fdisk /dev/nvme1n1; sudo mkfs.ext4 /dev/nvme1n1p1; 
+
+#mkdir ~/validator-config
+#sudo mount /dev/nvme1n1p1 ~/validator-config
+
+#should use tds.solana.com 
+##nohup validator.sh --identity ~/validator-config/validator-keypair.json --config-dir ~/validator-config --rpc-port 8899 --poll-for-new-genesis-block testnet.solana.com &
+

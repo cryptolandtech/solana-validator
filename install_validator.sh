@@ -29,13 +29,9 @@ cat <<EOF >> ecosystem.config.js
 module.exports = {
   apps : [{
     name: "validator",
-    //for staring without solana-install
-    script: "fullnode.sh",
-    cwd: "/home/ubuntu/.local/share/solana/install/active_release/multinode-demo/",
-    args: ["--validator", "--identity", "~/validator-config/validator-keypair.json", "--config-dir", "~/validator-config", "--rpc-port", "8899", "--poll-for-new-genesis-block", "testnet.solana.com"],
-    //script: "solana-install",
-    //cwd: "/validator_data/active_release/bin/",
-    //args: ["run", "validator.sh", "--", "--identity", "/validator_data/validator-keypair.json", "--stake", "500000", "testnet.solana.com"],
+    script: "solana-install",
+    cwd: "/home/ubuntu/.local/share/solana/install/active_release/bin/",
+    args: ["run", "validator.sh", "--", "--identity", "~/validator-config/validator-keypair.json", "--config-dir", "~/validator-config", "--rpc-port", "8899", "--poll-for-new-genesis-block", "testnet.solana.com"],
     error_file: "/var/log/pm2/validator-err.log",
     out_file: "/var/log/pm2/validator-out.log",
     merge_logs: true,

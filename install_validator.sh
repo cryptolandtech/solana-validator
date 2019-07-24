@@ -22,7 +22,7 @@ export PATH="/home/ubuntu/.local/share/solana/install/active_release/bin:$PATH"
 #sed -i 's/\$program "\${args\[@\]}"/pm2 start \$program -- "\${args\[@\]}"/g' /validator_data/active_release/multinode-demo/fullnode.sh
 
 #should use tds.solana.com 
-##validator.sh --identity ~/validator-keypair.json --config-dir ~/validator-config --rpc-port 8899 --poll-for-new-genesis-block testnet.solana.com
+##validator.sh --identity ~/validator-config/validator-keypair.json --config-dir ~/validator-config --rpc-port 8899 --poll-for-new-genesis-block testnet.solana.com
 #sudo mkdir /var/log/pm2
 #sudo chown ubuntu:ubuntu /var/log/pm2
 cat <<EOF >> ecosystem.config.js

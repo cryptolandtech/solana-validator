@@ -66,8 +66,3 @@ export PATH="/home/ubuntu/.local/share/solana/install/active_release/bin:$PATH"
 #should use tds.solana.com 
 #nohup validator.sh --identity ~/validator-config/validator-keypair.json --config-dir ~/validator-config --rpc-port 8899 --poll-for-new-genesis-block testnet.solana.com &
 nohup solana-install run validator.sh -- --identity ~/validator-config/validator-keypair.json --config-dir ~/validator-config --rpc-port 8899 --poll-for-new-genesis-block testnet.solana.com &
-
-
-Error: TransactionError(InstructionError(0, CustomError(0)) se rezolva:
-please insert this command     sudo launchctl limit maxfiles 65536 200000
-after This: sysctl -w net.inet.udp.maxdgram=65535

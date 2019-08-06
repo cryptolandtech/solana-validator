@@ -80,7 +80,7 @@ solana-wallet -k ~/validator-keypair.json --url http://tds.solana.com:8899 balan
 solana-gossip --entrypoint tds.solana.com:8001 spy
 
 #run validator
-validator.sh --identity ~/validator-keypair.json --voting-keypair ~/validator-vote-keypair.json --ledger ~/validator-config --rpc-port 8899 --poll-for-new-genesis-block tds.solana.com --limit-ledger-size --dynamic-port-range 9900-9910
+validator.sh --identity ~/validator-keypair.json --voting-keypair ~/validator-vote-keypair.json --ledger ~/validator-config --rpc-port 8899 --poll-for-new-genesis-block tds.solana.com --limit-ledger-size --dynamic-port-range 9900-9910 --no-airdrop
 
 #validator catch up
 solana-wallet -k ~/validator-keypair.json get-slot

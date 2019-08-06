@@ -75,22 +75,16 @@ nohup solana-install run validator.sh -- --identity ~/validator-config/validator
 #dry run 2
 #curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v0.17.1/install/solana-install-init.sh | sh -s - 0.18.0-pre0
 
+#check cluster status
 solana-wallet -k ~/validator-keypair.json --url http://tds.solana.com:8899 balance
 solana-gossip --entrypoint tds.solana.com:8001 spy
 
-#solana-keygen new -o ~/validator-vote-keypair.json
-#VOTE_PUBKEY=$(solana-keygen pubkey ~/validator-vote-keypair.json)
-#IDENTITY_PUBKEY=$(solana-keygen pubkey ~/validator-keypair.json)
-#solana-wallet create-vote-account "$VOTE_PUBKEY" "$IDENTITY_PUBKEY" 1
-
-
+#run validator
 validator.sh --identity ~/validator-keypair.json --voting-keypair ~/validator-vote-keypair.json --ledger ~/validator-config --rpc-port 8899 --poll-for-new-genesis-block tds.solana.com --limit-ledger-size --dynamic-port-range 9900-9910
 
 #validator catch up
 solana-wallet -k ~/validator-keypair.json get-slot
 solana-wallet -k ~/validator-keypair.json --url http://127.0.0.1:8899 get-slot
-
-
 
 #stake
 VOTE_PUBKEY=$(solana-keygen pubkey ~/validator-vote-keypair.json)

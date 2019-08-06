@@ -66,3 +66,27 @@ export PATH="/home/ubuntu/.local/share/solana/install/active_release/bin:$PATH"
 #should use tds.solana.com 
 #nohup validator.sh --identity ~/validator-config/validator-keypair.json --config-dir ~/validator-config --rpc-port 8899 --poll-for-new-genesis-block testnet.solana.com &
 nohup solana-install run validator.sh -- --identity ~/validator-config/validator-keypair.json --config-dir ~/validator-config --rpc-port 8899 --poll-for-new-genesis-block testnet.solana.com &
+
+
+#dry run 2
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v0.17.1/install/solana-install-init.sh | sh -s - 0.18.0-pre0
+
+solana-gossip --entrypoint tds.solana.com:8001 spy
+
+#solana-keygen new -o ~/validator-vote-keypair.json
+#VOTE_PUBKEY=$(solana-keygen pubkey ~/validator-vote-keypair.json)
+#IDENTITY_PUBKEY=$(solana-keygen pubkey ~/validator-keypair.json)
+#solana-wallet create-vote-account "$VOTE_PUBKEY" "$IDENTITY_PUBKEY" 1
+
+validator.sh --identity ~/validator-keypair.json --voting-keypair ~/validator-vote-keypair.json --ledger ~/validator-config --rpc-port 8899 --poll-for-new-genesis-block tds.solana.com --limit-ledger-size --dynamic-port-range 9900-9910
+
+#validator catch up
+solana-wallet -k ~/validator-keypair.json get-slot
+solana-wallet -k ~/validator-keypair.json --url http://127.0.0.1:8899 get-slot
+
+#stake
+solana-keygen pubkey solana-keygen pubkey ~/validator-vote-keypair.json
+solana-keygen new -o ~/stake-keypair.json
+
+solana-wallet delegate-stake ~/validator-stake-keypair.json 7vjDKexeNasaMits8yHvx3aejBFpifUfXf8jGUSsTJmW 42
+#solana-wallet deactivate-stake ~/validator-stake-keypair.json

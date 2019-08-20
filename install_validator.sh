@@ -134,3 +134,6 @@ curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "m
 #show stake info
 solana-wallet show-stake-account ~/validator-stake-keypair.json
 
+#deactivate stake before stopping the validator
+#solana-wallet deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 
+

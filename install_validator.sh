@@ -99,6 +99,8 @@ solana-wallet -k ~/validator-keypair.json --url http://tds.solana.com:8899 deleg
 #Dryrun3 
 ##############
 
+#curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v0.17.1/install/solana-install-init.sh | sh -s - 0.18.0-pre1
+
 #check balance
 solana-wallet --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 balance
 

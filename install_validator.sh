@@ -106,18 +106,24 @@ solana-wallet --keypair ~/validator-keypair.json --url http://edge.testnet.solan
 solana-wallet -k validator-keypair.json --url http://edge.testnet.solana.com:8899 airdrop 17179869184000
 
 #check network
-solana-gossip --entrypoint tds.solana.com:8001 spy
+solana-gossip --entrypoint edge.testnet.solana.com:8001 spy
 solana-wallet --keypair ~/validator-keypair.json --url http://edge.testnet.solana.com:8899 ping
 
 #run validator
-solana-validator --identity ~/validator-keypair.json --voting-keypair ~/validator-vote-keypair.json --ledger ~/volume/validator-config/ --rpc-port 8899 --entrypoint edge.testnet.solana.com:8001
+nohup solana-validator --identity ~/validator-keypair.json --voting-keypair ~/validator-vote-keypair.json --ledger ~/volume/validator-config/ --rpc-port 8899 --entrypoint edge.testnet.solana.com:8001 &
+
+#create vote account
+solana-wallet --keypair ~/validator-keypair.json --url http://edge.testnet.solana.com:8899 create-vote-account ~/validator-vote-keypair.json ~/validator-keypair.json 1
 
 #after the validator cought up, add stake
 solana-wallet --keypair ~/validator-keypair.json --url http://edge.testnet.solana.com:8899 delegate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 8589934592
 
+#get epoch info
+curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getEpochInfo"}' http://localhost:8899
 
+#get vote accounts
+curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getVoteAccounts"}' http://localhost:8899|jq
 
-
-
-
+#get leader schedule
+curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getLeaderSchedule"}' http://localhost:8899
 

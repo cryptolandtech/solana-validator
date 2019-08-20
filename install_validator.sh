@@ -93,3 +93,30 @@ solana-wallet -k ~/validator-keypair.json --url http://tds.solana.com:8899 deleg
 
 
 #solana-wallet deactivate-stake ~/validator-stake-keypair.json
+
+
+
+#Dryrun3 
+##############
+
+#check balance
+solana-wallet --keypair ~/validator-keypair.json --url http://edge.testnet.solana.com:8899 balance
+
+#airdrop
+solana-wallet -k validator-keypair.json --url http://edge.testnet.solana.com:8899 airdrop 17179869184000
+
+#check network
+solana-gossip --entrypoint tds.solana.com:8001 spy
+solana-wallet --keypair ~/validator-keypair.json --url http://edge.testnet.solana.com:8899 ping
+
+#run validator
+solana-validator --identity ~/validator-keypair.json --voting-keypair ~/validator-vote-keypair.json --ledger ~/volume/validator-config/ --rpc-port 8899 --entrypoint edge.testnet.solana.com:8001
+
+
+
+
+
+
+
+
+

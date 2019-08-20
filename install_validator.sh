@@ -131,3 +131,6 @@ curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "m
 #get leader schedule
 curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getLeaderSchedule"}' http://localhost:8899
 
+#show stake info
+solana-wallet show-stake-account ~/validator-stake-keypair.json
+

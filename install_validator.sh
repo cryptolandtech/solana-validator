@@ -112,7 +112,8 @@ solana-wallet --keypair ~/validator-keypair.json --url http://edge.testnet.solan
 #run validator
 solana-validator --identity ~/validator-keypair.json --voting-keypair ~/validator-vote-keypair.json --ledger ~/volume/validator-config/ --rpc-port 8899 --entrypoint edge.testnet.solana.com:8001
 
-
+#after the validator cought up, add stake
+solana-wallet --keypair ~/validator-keypair.json --url http://edge.testnet.solana.com:8899 delegate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 8589934592
 
 
 

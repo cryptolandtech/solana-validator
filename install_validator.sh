@@ -203,6 +203,8 @@ solana -k ~/validator-keypair.json -u http://tds.solana.com:8899 address
 solana show-vote-account ~/validator-vote-keypair.json
 #for each epoch, roughly credits earned / slots in epoch
 
+#crate a new voting key
+solana-keygen new -o ~/validator-vote-keypair.json
 
 #deactivate stake before stopping the validator
 #solana-wallet deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 

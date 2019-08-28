@@ -177,6 +177,7 @@ solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 creat
 #get slot
 solana --url http://127.0.0.1:8899 get-slot
 solana  --url http://tds.solana.com:8899 get-slot
+echo "me: $(solana --url http://127.0.0.1:8899 get-slot | grep '^[0-9]\+$'), cluster: $(solana --url http://tds.solana.com:8899 get-slot | grep '^[0-9]\+$')"
 
 #after the validator cought up, add stake
 solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 delegate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 8589934592

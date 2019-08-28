@@ -139,7 +139,8 @@ curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "m
 solana-wallet show-stake-account ~/validator-stake-keypair.json
 
 #deactivate stake before stopping the validator
-#solana-wallet deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 
+#solana-wallet deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getLeaderSchedule"}' http://localhost:8899
+
 
 
 
@@ -191,7 +192,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "m
 curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getVoteAccounts"}' http://localhost:8899|jq
 
 #get leader schedule
-curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getLeaderSchedule"}' http://localhost:8899
+curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getLeaderSchedule"}' http://localhost:8899|jq
 
 #show stake info
 solana show-stake-account ~/validator-stake-keypair.json

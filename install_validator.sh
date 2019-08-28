@@ -54,6 +54,8 @@ pm2 start
 sudo apt-get update
 sudo apt-get install -y npm
 sudo npm install pm2@latest -g
+sudo sudo mkdir /var/log/pm2
+sudo chown ubuntu:ubuntu /var/log/pm2/
 
 curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v0.16.6/install/solana-install-init.sh | sh -s
 export PATH="/home/ubuntu/.local/share/solana/install/active_release/bin:$PATH"
@@ -135,6 +137,61 @@ curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "m
 
 #show stake info
 solana-wallet show-stake-account ~/validator-stake-keypair.json
+
+#deactivate stake before stopping the validator
+#solana-wallet deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 
+
+
+
+#Dryrun4 
+##############
+
+#sudo apt-get update
+#sudo apt-get install -y npm
+#sudo npm install pm2@latest -g
+#sudo mkdir /var/log/pm2
+#sudo chown ubuntu:ubuntu /var/log/pm2
+
+
+#Modify lambda function to point to tds.solana.com
+
+
+#curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v0.18.0/install/solana-install-init.sh | sh -s - 0.18.0
+
+#check balance
+solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 balance
+
+#airdrop
+#solana -k validator-keypair.json --url http://tds.solana.com:8899 airdrop 17179869184000
+
+#check network
+solana-gossip --entrypoint tds.solana.com:8001 spy
+solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 ping
+
+#run validator
+nohup solana-validator --identity ~/validator-keypair.json --voting-keypair ~/validator-vote-keypair.json --ledger ~/volume/validator-config/ --rpc-port 8899 --entrypoint tds.solana.com:8001 &
+
+#create vote account
+solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 create-vote-account ~/validator-vote-keypair.json ~/validator-keypair.json 1
+
+#get slot
+solana --url http://127.0.0.1:8899 get-slot
+solana  --url http://tds.solana.com:8899 get-slot
+
+#after the validator cought up, add stake
+solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 delegate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 8589934592
+
+#get epoch info
+curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getEpochInfo"}' http://localhost:8899
+
+#get vote accounts
+curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getVoteAccounts"}' http://localhost:8899|jq
+
+#get leader schedule
+curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getLeaderSchedule"}' http://localhost:8899
+
+#show stake info
+solana show-stake-account ~/validator-stake-keypair.json
 
 #deactivate stake before stopping the validator
 #solana-wallet deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 

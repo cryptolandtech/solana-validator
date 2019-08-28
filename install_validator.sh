@@ -208,13 +208,13 @@ solana show-vote-account ~/validator-vote-keypair.json
 solana-keygen new -o ~/validator-vote-keypair.json
 
 #deactivate stake before stopping the validator
-#solana-wallet deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 
+#solana deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 
 
 
 ######Restart validator
 
 #undelegate
-solana-wallet deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 
+solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json
 
 #stop validator
 pm2 stop 0

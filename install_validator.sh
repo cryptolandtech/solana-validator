@@ -149,8 +149,7 @@ solana-wallet show-stake-account ~/validator-stake-keypair.json
 #sudo apt-get update
 #sudo apt-get install -y npm
 #sudo npm install pm2@latest -g
-#sudo mkdir /var/log/pm2
-#sudo chown ubuntu:ubuntu /var/log/pm2
+#sudo mkdir /var/log/pm2; sudo chown ubuntu:ubuntu /var/log/pm2
 
 
 #Modify lambda function to point to tds.solana.com

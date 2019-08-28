@@ -182,6 +182,9 @@ echo "me: $(solana --url http://127.0.0.1:8899 get-slot | grep '^[0-9]\+$'), clu
 #after the validator cought up, add stake
 solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 delegate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 8589934592
 
+#publish info
+solana-validator-info publish -u http://tds.solana.com:8899 -w "http://moonlet.xyz" -d "moonlet validator" ~/validator-keypair.json moonlet
+
 #get epoch info
 curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getEpochInfo"}' http://localhost:8899
 
@@ -193,6 +196,10 @@ curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "m
 
 #show stake info
 solana show-stake-account ~/validator-stake-keypair.json
+
+#get public key
+solana -k ~/validator-keypair.json -u http://tds.solana.com:8899 address
+
 
 #deactivate stake before stopping the validator
 #solana-wallet deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 

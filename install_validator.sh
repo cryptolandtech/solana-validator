@@ -200,6 +200,10 @@ solana show-stake-account ~/validator-stake-keypair.json
 #get public key
 solana -k ~/validator-keypair.json -u http://tds.solana.com:8899 address
 
+#aproximative uptime
+solana show-vote-account ~/validator-vote-keypair.json
+#for each epoch, roughly credits earned / slots in epoch
+
 
 #deactivate stake before stopping the validator
 #solana-wallet deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 

@@ -210,6 +210,8 @@ solana-keygen new -o ~/validator-vote-keypair.json
 #deactivate stake before stopping the validator
 #solana deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 
 
+#solana withdraw-stake
+#Once your deactivated stake has cooled down, solana withdraw-stake can be used to reclaim those lamports back
 
 ######Restart validator
 

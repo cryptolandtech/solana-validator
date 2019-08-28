@@ -210,3 +210,20 @@ solana-keygen new -o ~/validator-vote-keypair.json
 #deactivate stake before stopping the validator
 #solana-wallet deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 
 
+
+######Restart validator
+
+#undelegate
+solana-wallet deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 
+
+#stop validator
+pm2 stop 0
+
+#start validator
+pm2 start
+
+#wait to catchup & delegate
+echo "me: $(solana --url http://127.0.0.1:8899 get-slot | grep '^[0-9]\+$'), cluster: $(solana --url http://tds.solana.com:8899 get-slot | grep '^[0-9]\+$')"
+solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 delegate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 8589934592
+
+

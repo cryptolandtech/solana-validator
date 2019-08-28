@@ -219,6 +219,12 @@ solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 deact
 #stop validator
 pm2 stop 0
 
+#recreate vote key
+solana-keygen new -o ~/validator-vote-keypair.json
+
+#recreate vote account
+solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 create-vote-account ~/validator-vote-keypair.json ~/validator-keypair.json 1
+
 #start validator
 pm2 start
 

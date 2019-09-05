@@ -1,0 +1,66 @@
+import boto3
+from botocore.vendored import requests
+from botocore.vendored.requests.exceptions import RequestException
+
+def lambda_handler(context,event):
+    
+    endpoint = "http://testnet.solana.com:8899/"
+    data = {'jsonrpc':'2.0','id':1, 'method':'getClusterNodes'}
+    headers={"content-type": "application/json"}
+    
+    try:
+      resp = requests.post(url=endpoint, json=data, headers=headers, timeout=5)
+    except RequestException as e:
+      print(e)
+      quit()
+
+    
+    result_json = resp.json()['result']
+    
+    ip_list = []
+    for _node in result_json: 
+      ip_list.append(_node['gossip'].split(":")[0])
+    
+    
+    print(ip_list)
+    sg_group_id='sg-002011ccbf97e63bb'
+    client = boto3.client('ec2')
+        
+    sg = client.describe_security_groups( GroupIds=[ sg_group_id ])
+    sg_rules = []
+    
+    if sg['SecurityGroups'][0]['IpPermissions']:
+      for rule in sg['SecurityGroups'][0]['IpPermissions'][0]['IpRanges']:
+        sg_rules.append(rule['CidrIp'])
+    
+    
+    for rule in sg_rules:
+      if rule.split('/')[0] not in ip_list:
+        delete = client.revoke_security_group_ingress(
+                 GroupId=sg_group_id,
+                 IpPermissions=[
+        	       {
+                   'FromPort': 0,
+                   'ToPort': 65535,
+                   'IpProtocol': '-1',
+                   'IpRanges': [{ 'CidrIp': rule }]
+    	       }
+                 ]
+        )
+        sg_rules.remove(rule)
+        
+    
+    for ip in ip_list:
+      print()
+      if not ip + '/32' in sg_rules:
+        add = client.authorize_security_group_ingress(
+              GroupId=sg_group_id,
+              IpPermissions=[
+                {
+                  'FromPort': 0,
+                  'ToPort': 65535,
+                  'IpProtocol': '-1',
+                  'IpRanges': [{ 'CidrIp': ip + '/32' }]
+                }
+               ]
+          )

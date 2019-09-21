@@ -238,3 +238,99 @@ echo "me: $(solana --url http://127.0.0.1:8899 get-slot | grep '^[0-9]\+$'), clu
 solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 delegate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 8589934592
 
 
+#Dryrun 5
+
+
+#sudo apt-get update
+#sudo apt-get install -y npm
+#sudo npm install pm2@latest -g
+#sudo mkdir /var/log/pm2; sudo chown ubuntu:ubuntu /var/log/pm2
+
+
+#Modify lambda function to point to tds.solana.com
+
+
+#curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v0.18.1/install/solana-install-init.sh | sh -s - 0.18.1
+#solana set --url http://testnet.solana.com:8899
+#solana set --keypair ~/validator-keypair.json
+
+#check balance
+solana balance
+
+
+#airdrop
+#solana airdrop 17179869184000
+
+#check network
+solana-gossip --entrypoint tds.solana.com:8001 spy
+solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 ping
+
+#run validator
+#nohup solana-validator --identity ~/validator-keypair.json --voting-keypair ~/validator-vote-keypair.json --ledger ~/volume/validator-config/ --rpc-port 8899 --entrypoint tds.solana.com:8001 &
+pm2 start
+
+#create vote account
+solana create-vote-account ~/validator-vote-keypair.json ~/validator-keypair.json 1
+
+#get slot
+solana --url http://127.0.0.1:8899 get-slot
+solana  --url http://tds.solana.com:8899 get-slot
+echo "me: $(solana --url http://127.0.0.1:8899 get-slot | grep '^[0-9]\+$'), cluster: $(solana --url http://tds.solana.com:8899 get-slot | grep '^[0-9]\+$')"
+
+#after the validator cought up, add stake
+solana delegate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 8589934592
+
+#publish info
+solana-validator-info publish -u http://tds.solana.com:8899 -w "http://moonlet.xyz" -d "moonlet validator" ~/validator-keypair.json moonlet
+
+#get epoch info
+curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getEpochInfo"}' http://localhost:8899
+
+#get vote accounts
+curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getVoteAccounts"}' http://localhost:8899|jq
+
+#get leader schedule
+curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getLeaderSchedule"}' http://localhost:8899|jq
+
+#show stake info
+solana show-stake-account ~/validator-stake-keypair.json
+
+#get public key
+solana -k ~/validator-keypair.json -u http://tds.solana.com:8899 address
+
+#aproximative uptime
+solana show-vote-account ~/validator-vote-keypair.json
+#for each epoch, roughly credits earned / slots in epoch
+
+#crate a new voting key
+solana-keygen new -o ~/validator-vote-keypair.json
+
+#deactivate stake before stopping the validator
+#solana deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 
+
+#solana withdraw-stake
+#Once your deactivated stake has cooled down, solana withdraw-stake can be used to reclaim those lamports back
+
+######Restart validator
+
+#undelegate
+solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json
+
+#stop validator
+pm2 stop 0
+
+#recreate vote key
+solana-keygen new -o ~/validator-vote-keypair.json
+
+#recreate vote account
+solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 create-vote-account ~/validator-vote-keypair.json ~/validator-keypair.json 1
+
+#start validator
+pm2 start
+
+#recreate stake key
+solana-keygen new -o ~/validator-stake-keypair.json
+
+#wait to catchup & delegate
+echo "me: $(solana --url http://127.0.0.1:8899 get-slot | grep '^[0-9]\+$'), cluster: $(solana --url http://tds.solana.com:8899 get-slot | grep '^[0-9]\+$')"
+solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 delegate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 8589934592

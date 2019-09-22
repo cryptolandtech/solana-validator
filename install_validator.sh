@@ -251,7 +251,7 @@ solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 deleg
 
 
 #curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v0.18.1/install/solana-install-init.sh | sh -s - 0.18.1
-#solana set --url http://testnet.solana.com:8899
+#solana set --url http://tds.solana.com:8899
 #solana set --keypair ~/validator-keypair.json
 
 #check balance

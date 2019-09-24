@@ -238,17 +238,21 @@ echo "me: $(solana --url http://127.0.0.1:8899 get-slot | grep '^[0-9]\+$'), clu
 solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 delegate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 8589934592
 
 
-#Dryrun 5
 
+
+
+
+
+
+
+#Dryrun 5
 
 #sudo apt-get update
 #sudo apt-get install -y npm
 #sudo npm install pm2@latest -g
 #sudo mkdir /var/log/pm2; sudo chown ubuntu:ubuntu /var/log/pm2
 
-
 #Modify lambda function to point to tds.solana.com
-
 
 #curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v0.18.1/install/solana-install-init.sh | sh -s - 0.18.1
 #solana set --url http://tds.solana.com:8899
@@ -257,13 +261,16 @@ solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 deleg
 #check balance
 solana balance
 
-
 #airdrop
 #solana airdrop 17179869184000
 
 #check network
 solana-gossip --entrypoint tds.solana.com:8001 spy
 solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 ping
+
+#create keys if they do not exist
+#solana-keygen new -o ~/validator-vote-keypair.json
+#solana-keygen new -o ~/validator-stake-keypair.json
 
 #run validator
 #nohup solana-validator --identity ~/validator-keypair.json --voting-keypair ~/validator-vote-keypair.json --ledger ~/volume/validator-config/ --rpc-port 8899 --entrypoint tds.solana.com:8001 &
@@ -303,14 +310,14 @@ solana -k ~/validator-keypair.json -u http://tds.solana.com:8899 address
 solana show-vote-account ~/validator-vote-keypair.json
 #for each epoch, roughly credits earned / slots in epoch
 
-#crate a new voting key
-solana-keygen new -o ~/validator-vote-keypair.json
-
 #deactivate stake before stopping the validator
 #solana deactivate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 
 
 #solana withdraw-stake
 #Once your deactivated stake has cooled down, solana withdraw-stake can be used to reclaim those lamports back
+
+
+
 
 ######Restart validator
 

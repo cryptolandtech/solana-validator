@@ -3,9 +3,8 @@ sudo apt upgrade -y
 
 sudo add-apt-repository ppa:longsleep/golang-backports
 sudo apt-get update
-sudo apt-get install golang-go
 
-sudo apt-get install make gcc python
+sudo apt-get install golang-go make gcc python jq
 echo "export GOPATH=$HOME/go" >> ~/.bashrc
 echo "export PATH=$GOPATH/bin:$PATH" >> ~/.bashrc
 source ~/.bashrc 
@@ -23,3 +22,16 @@ gaiad unsafe-reset-all
 gaiad tendermint show-validator
 
 gaiad start
+
+#show status, if caught up
+gaiacli status|jq
+
+#show keys
+#show address and pk
+gaiacli keys list
+
+#create new key
+gaiacli keys add moonlet
+
+#
+gaiacli q account cosmos1wk7cej3utkgxexktwlf20x7zlv4575w8kafq8k --chain-id gaia-13006

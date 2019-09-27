@@ -38,3 +38,6 @@ gaiacli q account cosmos1wk7cej3utkgxexktwlf20x7zlv4575w8kafq8k --chain-id gaia-
 
 #get cosmosvalconspub
 #gaiad tendermint show-validator
+
+#see all staking validators
+#$ gaiacli q staking validators

@@ -35,3 +35,6 @@ gaiacli keys add moonlet
 
 #
 gaiacli q account cosmos1wk7cej3utkgxexktwlf20x7zlv4575w8kafq8k --chain-id gaia-13006
+
+#get cosmosvalconspub
+#gaiad tendermint show-validator

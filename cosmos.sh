@@ -51,5 +51,15 @@ gaiacli tx staking create-validator --commission-max-change-rate=0.1  --commissi
 #see all staking validators
 gaiacli q staking validators --chain-id=gaia-13006
 
+
+
 #delegate to your validator
 
+#get cosmosvaloper address
+gaiacli keys show moonlet --bech=val
+
+#delegate
+gaiacli tx staking delegate cosmosvaloper 100muon --from account_name --gas auto --gas-adjustment 1.5 --chain-id=gaia-13006
+
+#you should appear here
+#https://hubble.figment.network/cosmos/chains/gaia-13006

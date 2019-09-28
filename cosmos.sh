@@ -36,8 +36,20 @@ gaiacli keys add moonlet
 #
 gaiacli q account cosmos1wk7cej3utkgxexktwlf20x7zlv4575w8kafq8k --chain-id gaia-13006
 
-#get cosmosvalconspub
-#gaiad tendermint show-validator
+#get validatior cosmosvalconspub
+gaiad tendermint show-validator
+
+#get validator address
+gaiad tendermint show-address
+
+#see your account
+gaiacli q account <cosmosvalconspub>
+
+#create a validator
+gaiacli tx staking create-validator --commission-max-change-rate=0.1  --commission-max-rate=0.1 --commission-rate=0.1 --min-self-delegation=1 --amount 100000muon --pubkey=<cosmosvalconspub1> --moniker=<name> --chain-id="gaia-13006" --from=moonlet
 
 #see all staking validators
-#$ gaiacli q staking validators
+gaiacli q staking validators --chain-id=gaia-13006
+
+#delegate to your validator
+

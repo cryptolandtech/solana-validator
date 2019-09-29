@@ -9,7 +9,7 @@ echo "export GOPATH=$HOME/go" >> ~/.bashrc
 echo "export PATH=$GOPATH/bin:$PATH" >> ~/.bashrc
 source ~/.bashrc 
 
-https://github.com/cosmos/gaia.git
+git clone https://github.com/cosmos/gaia.git
 cd gaia & make install
 
 curl https://raw.githubusercontent.com/cosmos/launch/master/genesis.json > $HOME/.gaiad/config/genesis.json

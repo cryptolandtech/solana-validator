@@ -8,7 +8,7 @@ sudo add-apt-repository ppa:longsleep/golang-backports
 sudo apt-get update
 sudo apt upgrade -y
 #go 1.13
-sudo apt-get install -y golang-go make gcc python jq 
+sudo apt-get install -y golang-go make gcc python jq liblz4-tool
 
 git clone https://github.com/terra-project/core/
 cd core
@@ -32,6 +32,12 @@ vi ../.terrad/config/config.toml
 #seeds = "b416f0b04e2c71b8d76f993468352030e2dcf2a9@public-seed-node.columbus.certus.one:26656, 0621acccfc2c847e67d84eb234bcc26323a103c3@public-seed.terra.dev:26656, 46bba3a2c615ea5b569f086344f932fa11e81c01@public-seed2.terra.dev:26656"
 #persistent_peers = "e6325ba7c490ba371135c9f3fcead66da1bd8cf1@terra-sentry01.dokia.cloud:26656, dba5defd7b120937da37aea7f37d06870637558d@terra-sentry02.dokia.cloud:26656, eb4ce12133c450ba6665e06309570ea2843e21d8@167.86.104.33:26656"
 #terrad unsafe-reset-all
+
+cd /.terrad
+#check the latest snapshot https://www.chainlayer.io/
+wget http://quicksync.chainlayer.io/terra/columbus-2.20190924.0215.tar.lz4
+
+
 terrad start
 
 

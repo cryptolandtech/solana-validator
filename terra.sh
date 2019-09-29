@@ -3,6 +3,8 @@ sudo apt upgrade -y
 
 sudo add-apt-repository ppa:longsleep/golang-backports
 sudo apt-get update
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
 
 sudo apt-get install golang-go make gcc python jq
 echo "export GOPATH=$HOME/go" >> ~/.bashrc
@@ -11,13 +13,15 @@ source ~/.bashrc
 
 git clone https://github.com/terra-project/core/
 cd core
-
 #if there is a problem with golangci-lint, go to go.mod and add the latest version
 make
 
 terrad version --long
 terracli version --long
 
+#/etc/security/limits.conf
+#*                soft    nofile          65535
+#*                hard    nofile          65535
 
 
 

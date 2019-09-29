@@ -6,14 +6,13 @@ sudo apt-get update
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 
-sudo apt-get install golang-go make gcc python jq
+sudo apt-get install -y golang-go make gcc python jq
 echo "export GOPATH=$HOME/go" >> ~/.bashrc
 echo "export PATH=$GOPATH/bin:$PATH" >> ~/.bashrc
-source ~/.bashrc 
+#source ~/.bashrc 
 
 git clone https://github.com/terra-project/core/
 cd core
-#if there is a problem with golangci-lint, go to go.mod and add the latest version
 make
 
 terrad version --long

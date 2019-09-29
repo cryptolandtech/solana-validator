@@ -23,64 +23,12 @@ terracli version --long
 #*                soft    nofile          65535
 #*                hard    nofile          65535
 
-
-
-
-
-
-
-
-
-
-curl https://raw.githubusercontent.com/cosmos/launch/master/genesis.json > $HOME/.gaiad/config/genesis.json
-
-#add seeds = "35b9658ca14dd4908b37f327870cbd5007ee06f1@116.203.146.149:26656" in .gaiad/config/config.toml
-#get seeds from https://github.com/cosmos/testnets
-
-gaiad unsafe-reset-all
-
-gaiad tendermint show-validator
-
-gaiad start
-
-#show status, if caught up
-gaiacli status|jq
-
-#show keys
-#show address and pk
-gaiacli keys list
-
-#create new key
-gaiacli keys add moonlet
-
-#
-gaiacli q account cosmos1wk7cej3utkgxexktwlf20x7zlv4575w8kafq8k --chain-id gaia-13006
-
-#get validatior cosmosvalconspub
-gaiad tendermint show-validator
-
-#get validator address
-gaiad tendermint show-address
-
-#see your account
-gaiacli q account <cosmosvalconspub>
-
-#create a validator
-gaiacli tx staking create-validator --commission-max-change-rate=0.1  --commission-max-rate=0.1 --commission-rate=0.1 --min-self-delegation=1 --amount 100000muon --pubkey=<cosmosvalconspub1> --moniker=<name> --chain-id="gaia-13006" --from=moonlet
-
-#see all staking validators
-gaiacli q staking validators --chain-id=gaia-13006
-
-
-
-#delegate to your validator
-
-#get cosmosvaloper address
-gaiacli keys show moonlet --bech=val
-
-#delegate
-gaiacli tx staking delegate cosmosvaloper 100muon --from account_name --gas auto --gas-adjustment 1.5 --chain-id=gaia-13006
-
-#you should appear here
-#https://hubble.figment.network/cosmos/chains/gaia-13006
-© 2019 GitHub, Inc.
+terrad init moonlet
+wget https://raw.githubusercontent.com/terra-project/launch/master/columbus-2/columbus-2-genesis.json
+mv columbus-2-genesis.json ../.terrad/config/genesis.json
+vi ../.terrad/config/config.toml 
+#add:
+#seeds = "b416f0b04e2c71b8d76f993468352030e2dcf2a9@public-seed-node.columbus.certus.one:26656, 0621acccfc2c847e67d84eb234bcc26323a103c3@public-seed.terra.dev:26656, 46bba3a2c615ea5b569f086344f932fa11e81c01@public-seed2.terra.dev:26656"
+#persistent_peers = "e6325ba7c490ba371135c9f3fcead66da1bd8cf1@terra-sentry01.dokia.cloud:26656, dba5defd7b120937da37aea7f37d06870637558d@terra-sentry02.dokia.cloud:26656, eb4ce12133c450ba6665e06309570ea2843e21d8@167.86.104.33:26656"
+terrad unsafe-reset-all
+terrad start

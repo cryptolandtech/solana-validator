@@ -15,6 +15,7 @@ cd core
 git checkout origin/master
 make
 #if you have error add latest version of lint in go.mod
+#https://github.com/golangci/golangci-lint/releases
 
 terrad version --long
 terracli version --long

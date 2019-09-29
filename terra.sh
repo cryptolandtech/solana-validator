@@ -11,7 +11,6 @@ sudo apt-get install -y golang-go make gcc python jq
 
 git clone https://github.com/terra-project/core/
 cd core
-git checkout v0.2.3
 make
 
 terrad version --long

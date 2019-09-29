@@ -1,15 +1,13 @@
-sudo apt update
-sudo apt upgrade -y
-
-sudo add-apt-repository ppa:longsleep/golang-backports
-sudo apt-get update
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
-
-sudo apt-get install -y golang-go make gcc python jq
 echo "export GOPATH=$HOME/go" >> ~/.bashrc
 echo "export PATH=$GOPATH/bin:$PATH" >> ~/.bashrc
 #source ~/.bashrc 
+
+sudo add-apt-repository ppa:longsleep/golang-backports
+sudo apt-get update
+sudo apt upgrade -y
+sudo apt-get install -y golang-go make gcc python jq
 
 git clone https://github.com/terra-project/core/
 cd core

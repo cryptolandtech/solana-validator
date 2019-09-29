@@ -10,7 +10,23 @@ echo "export PATH=$GOPATH/bin:$PATH" >> ~/.bashrc
 source ~/.bashrc 
 
 git clone https://github.com/terra-project/core/
-cd core & make install
+cd core
+
+#if there is a problem with golangci-lint, go to go.mod and add the latest version
+make
+
+terrad version --long
+terracli version --long
+
+
+
+
+
+
+
+
+
+
 
 curl https://raw.githubusercontent.com/cosmos/launch/master/genesis.json > $HOME/.gaiad/config/genesis.json
 

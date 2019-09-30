@@ -37,7 +37,9 @@ cd /.terrad
 #check the latest snapshot https://www.chainlayer.io/
 wget http://quicksync.chainlayer.io/terra/columbus-2.20190924.0215.tar.lz4
 
-
 terrad start
 
+#check if synced up
+terracli status|jq
 
+terracli tx staking create-validator --amount=9000000uluna --pubkey=$(terrad tendermint show-validator) --moniker="moonlet" --chain-id=columbus-2 --from=moonlet --commission-rate="0.10" --commission-max-rate="0.20" --commission-max-change-rate="0.01" --min-self-delegation="1000000"

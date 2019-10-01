@@ -11,7 +11,7 @@ sudo apt upgrade -y
 sudo apt-get install -y golang-go make gcc python jq liblz4-tool
 
 git clone https://github.com/cosmos/gaia.git
-cd gaia & make install
+cd gaia & make
 
 gaiad version --long
 gaiad init moonlet

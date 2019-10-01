@@ -1,23 +1,29 @@
-sudo apt update
-sudo apt upgrade -y
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
+echo "export GOPATH=$HOME/go" >> ~/.bashrc
+echo "export PATH=$GOPATH/bin:$PATH" >> ~/.bashrc
+#source ~/.bashrc 
 
 sudo add-apt-repository ppa:longsleep/golang-backports
 sudo apt-get update
-
-sudo apt-get install golang-go make gcc python jq
-echo "export GOPATH=$HOME/go" >> ~/.bashrc
-echo "export PATH=$GOPATH/bin:$PATH" >> ~/.bashrc
-source ~/.bashrc 
+sudo apt upgrade -y
+#go 1.13
+sudo apt-get install -y golang-go make gcc python jq liblz4-tool
 
 git clone https://github.com/cosmos/gaia.git
 cd gaia & make install
 
+gaiad version --long
+gaiad init moonlet
+#gaiad unsafe-reset-all
+
 curl https://raw.githubusercontent.com/cosmos/launch/master/genesis.json > $HOME/.gaiad/config/genesis.json
+wget http://quicksync.chainlayer.io/cosmos/cosmoshub-2.20190924.0605.tar.lz4	
+lz4 -d  cosmoshub-2.20190924.0605.tar.lz4| tar xf -
 
-#add seeds = "35b9658ca14dd4908b37f327870cbd5007ee06f1@116.203.146.149:26656" in .gaiad/config/config.toml
-#get seeds from https://github.com/cosmos/testnets
-
-gaiad unsafe-reset-all
+#add seeds in .gaiad/config/config.toml
+#seeds = "3e16af0cead27979e1fc3dac57d03df3c7a77acc@3.87.179.235:26656,ba3bacc714817218562f743178228f23678b2873@public-seed-node.cosmoshub.certus.one:26656" 
+#get seeds from https://github.com/cosmos/launch or https://github.com/cosmos/gaia/blob/master/docs/join-mainnet.md
 
 gaiad tendermint show-validator
 

@@ -10,8 +10,8 @@ sudo apt upgrade -y
 #go 1.13
 sudo apt-get install -y golang-go make gcc python jq liblz4-tool
 
-git clone https://github.com/cosmos/gaia.git
-cd gaia  
+git clone https://github.com/cosmos/cosmos-sdk.git
+cd cosmos-sdk
 make
 
 gaiad version --long

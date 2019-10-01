@@ -2,13 +2,14 @@ export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 echo "export GOPATH=$HOME/go" >> ~/.bashrc
 echo "export PATH=$GOPATH/bin:$PATH" >> ~/.bashrc
-#source ~/.bashrc 
+#source ~/.bashrc
 
 sudo add-apt-repository ppa:longsleep/golang-backports
 sudo apt-get update
 sudo apt upgrade -y
 #go 1.13
-sudo apt-get install -y golang-go make gcc python jq liblz4-tool
+sudo apt-get install -y golang-go make gcc python jq liblz4-tool npm
+sudo npm install pm2@latest -g
 
 git clone https://github.com/cosmos/cosmos-sdk.git
 cd cosmos-sdk

@@ -71,3 +71,10 @@ gaiacli tx staking delegate cosmosvaloper 100muon --from account_name --gas auto
 
 #you should appear here
 #https://hubble.figment.network/cosmos/chains/gaia-13006
+
+
+
+
+#see all peers
+curl -s http://localhost:26657/net_info |grep n_peers
+ 

@@ -1,3 +1,8 @@
+echo '* soft nofile 65536' | sudo tee -a /etc/security/limits.conf
+echo '* hard nofile 65536' | sudo tee -a /etc/security/limits.conf
+echo 'session required pam_limits.so' | sudo tee -a /etc/pam.d/common-session
+prlimit --pid `pidof gaiad` --nofile=65536:65536
+
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 echo "export GOPATH=$HOME/go" >> ~/.bashrc
@@ -18,6 +23,9 @@ make
 gaiad version --long
 gaiad init moonlet
 #gaiad unsafe-reset-all
+
+vi .gaiad/config/gaiad.toml 
+#minimum-gas-prices = "0.025uatom"
 
 curl https://raw.githubusercontent.com/cosmos/launch/master/genesis.json > $HOME/.gaiad/config/genesis.json
 wget http://quicksync.chainlayer.io/cosmos/cosmoshub-2.20190924.0605.tar.lz4	
@@ -77,4 +85,7 @@ gaiacli tx staking delegate cosmosvaloper 100muon --from account_name --gas auto
 
 #see all peers
 curl -s http://localhost:26657/net_info |grep n_peers
+ 
+#see valoper keys
+gaiacli keys show moonlet --bech=val
  

@@ -43,3 +43,6 @@ terrad start
 terracli status|jq
 
 terracli tx staking create-validator --amount=9000000uluna --pubkey=$(terrad tendermint show-validator) --moniker="moonlet" --chain-id=columbus-2 --from=moonlet --commission-rate="0.10" --commission-max-rate="0.20" --commission-max-change-rate="0.01" --min-self-delegation="1000000"
+
+#see valoper keys
+gaiacli keys show moonlet --bech=val

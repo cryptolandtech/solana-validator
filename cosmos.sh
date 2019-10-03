@@ -62,14 +62,14 @@ gaiad tendermint show-address
 gaiacli q account <cosmosvalconspub>
 
 #create a validator
-gaiacli tx staking create-validator --commission-max-change-rate=0.1  --commission-max-rate=0.1 --commission-rate=0.1 --min-self-delegation=1 --amount 100000muon --pubkey=<cosmosvalconspub1> --moniker=<name> --chain-id="gaia-13006" --from=moonlet
+gaiacli tx staking create-validator  --amount=1000000uatom --pubkey=$(gaiad tendermint show-validator) --moniker="moonlet" --chain-id=cosmoshub-2 --commission-rate="0.10" --commission-max-rate="0.20" --commission-max-change-rate="0.01" --min-self-delegation="1" --gas="auto" --gas-prices="0.025uatom" --from=moonlet
+
+#verify you validator
+gaiacli tx slashing unjail --from moonlet --chain-id=gaia-13006
 
 #see all staking validators
 gaiacli q staking validators --chain-id=gaia-13006
 
-
-
-#delegate to your validator
 
 #get cosmosvaloper address
 gaiacli keys show moonlet --bech=val
@@ -89,3 +89,13 @@ curl -s http://localhost:26657/net_info |grep n_peers
 #see valoper keys
 gaiacli keys show moonlet --bech=val
  
+#see validator details
+gaiacli query staking validator cosmosvaloper --chain-id=gaia-1300
+
+#check voting progress, jailed status, ..
+gaiacli query slashing signing-info cosmosvalconspub --chain-id=gaia-13006
+
+#unjail in case of downtime
+gaiacli tx slashing unjail --from moonlet --chain-id=gaia-13006
+
+

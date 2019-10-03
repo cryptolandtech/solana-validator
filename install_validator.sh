@@ -252,6 +252,11 @@ solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 deleg
 #sudo npm install pm2@latest -g
 #sudo mkdir /var/log/pm2; sudo chown ubuntu:ubuntu /var/log/pm2
 
+###Install nvidia
+
+############
+
+
 #Modify lambda function to point to tds.solana.com
 
 #curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v0.18.1/install/solana-install-init.sh | sh -s - 0.18.1

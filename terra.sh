@@ -46,3 +46,15 @@ terracli tx staking create-validator --amount=9000000uluna --pubkey=$(terrad ten
 
 #see valoper keys
 gaiacli keys show moonlet --bech=val
+
+
+
+#upgrade node softaware
+############
+
+mv core core.bck
+git clone https://github.com/terra-project/core/
+git checkout vX.X
+make
+pm2 restart
+

@@ -35,3 +35,4 @@ ulimit -n 65535
 cd ../node
 screen node -use-prometheus
 Ctrl+A+D / screen -ls / screen -R
+./node -use-log-view

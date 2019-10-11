@@ -46,6 +46,9 @@ gaiacli status|jq
 #show address and pk
 gaiacli keys list
 
+#see valoper keys
+gaiacli keys show moonlet --bech=val
+
 #create new key
 gaiacli keys add moonlet
 

@@ -112,4 +112,5 @@ curl 0:26657/net_info
 # get my peer info. node_id@ip:port (node_id found using gaiad tendermint show-node-id)
 # gaiad tendermint show-node-id
 
-
+#check if you have voted
+curl localhost:26657/consensus_state -s | grep $(gaiacli status | jq -r .validator_info.address[:12])

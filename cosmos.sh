@@ -106,3 +106,5 @@ curl 0:26657/consensus_state
 
 #peers that i'm connected to
 curl 0:26657/net_info
+
+#byte_address can be found in priv_validator_key.json

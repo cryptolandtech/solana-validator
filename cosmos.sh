@@ -108,3 +108,8 @@ curl 0:26657/consensus_state
 curl 0:26657/net_info
 
 #byte_address can be found in priv_validator_key.json
+
+# get my peer info. node_id@ip:port (node_id found using gaiad tendermint show-node-id)
+# gaiad tendermint show-node-id
+
+

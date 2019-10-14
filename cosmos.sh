@@ -101,4 +101,5 @@ gaiacli query slashing signing-info cosmosvalconspub --chain-id=gaia-13006
 #unjail in case of downtime
 gaiacli tx slashing unjail --from moonlet --chain-id=gaia-13006
 
-
+curl 0:26657/consensus_state
+curl 0:26657/net_info

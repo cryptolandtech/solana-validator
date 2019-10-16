@@ -1,3 +1,10 @@
+#cosmos  Cosmos Account Address
+#cosmospub  Cosmos Account Public Key
+#cosmosvalcons  Cosmos Validator Consensus Address
+#cosmosvalconspub  Cosmos Validator Consensus Public Key
+#cosmosvaloper  Cosmos Validator Operator Address
+#cosmosvaloperpub  Cosmos Validator Operator Public Key
+
 echo '* soft nofile 65536' | sudo tee -a /etc/security/limits.conf
 echo '* hard nofile 65536' | sudo tee -a /etc/security/limits.conf
 echo 'session required pam_limits.so' | sudo tee -a /etc/pam.d/common-session

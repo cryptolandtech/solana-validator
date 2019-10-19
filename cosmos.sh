@@ -25,7 +25,7 @@ sudo npm install pm2@latest -g
 
 git clone https://github.com/cosmos/cosmos-sdk.git
 cd cosmos-sdk
-make
+git checkout v0.34.9; GO111MODULE=on; make install
 
 gaiad version --long
 gaiad init moonlet

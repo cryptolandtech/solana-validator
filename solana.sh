@@ -2,7 +2,7 @@
 sudo apt-get update
 sudo apt-get install -y npm
 sudo npm install pm2@latest -g
-
+ solana validator-info publish moonlet -u http://tds.solana.com:8899 --website "http://moonlet.xyz"
 curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v0.16.6/install/solana-install-init.sh | sh -s
 export PATH="/home/ubuntu/.local/share/solana/install/active_release/bin:$PATH"
 
@@ -307,8 +307,7 @@ a=$(solana --url http://127.0.0.1:8899 get-slot | grep '^[0-9]\+$') && b=$(solan
 solana delegate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 8589934592
 
 #publish info
-solana-validator-info publish -u http://tds.solana.com:8899 -w "http://moonlet.xyz" -d "moonlet validator" ~/validator-keypair.json moonlet
-
+ solana validator-info publish moonlet -u http://tds.solana.com:8899 --website "http://moonlet.xyz"
 #get epoch info
 curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","id":1, "method":"getEpochInfo"}' http://localhost:8899
 

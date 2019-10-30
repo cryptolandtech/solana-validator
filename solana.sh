@@ -294,6 +294,8 @@ pm2 start
 
 #create vote account
 solana create-vote-account ~/validator-vote-keypair.json ~/validator-keypair.json 
+#create stake account
+solana create-stake-account ~/validator-stake-keypair.json 1 SOL
 
 #get slot
 solana --url http://127.0.0.1:8899 get-slot

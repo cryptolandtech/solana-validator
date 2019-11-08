@@ -3,10 +3,11 @@ export PATH=$GOPATH/bin:$PATH
 echo "export GOPATH=$HOME/go" >> ~/.bashrc
 echo "export PATH=$GOPATH/bin:$PATH" >> ~/.bashrc
 #source ~/.bashrc 
-
-sudo add-apt-repository ppa:longsleep/golang-backports
 sudo apt-get update
 sudo apt upgrade -y
+sudo apt-get install add-apt-repository git
+sudo add-apt-repository ppa:longsleep/golang-backports
+sudo apt-get update
 #go 1.13
 sudo apt-get install -y golang-go make gcc python jq liblz4-tool
 

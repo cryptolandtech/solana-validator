@@ -1,6 +1,7 @@
 #ports
 #no ingress ports required. only SSH 22
 
+#sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:longsleep/golang-backports
 sudo apt upgrade -y
 #go 1.13

@@ -13,7 +13,7 @@ sudo apt-get install -y golang-go make gcc python jq liblz4-tool
 
 git clone https://github.com/terra-project/core/
 cd core
-git checkout origin/master
+git checkout v0.2.6
 make
 #if you have error add latest version of lint in go.mod
 #https://github.com/golangci/golangci-lint/releases

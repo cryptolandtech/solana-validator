@@ -37,6 +37,7 @@ vi ../.terrad/config/config.toml
 cd /.terrad
 #check the latest snapshot https://www.chainlayer.io/
 wget http://quicksync.chainlayer.io/terra/columbus-2.20190924.0215.tar.lz4
+lz4 -d  cosmoshub-2.20190924.0605.tar.lz4| tar xf -
 
 terrad start
 

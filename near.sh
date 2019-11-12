@@ -13,3 +13,6 @@ git clone https://github.com/nearprotocol/nearcore.git
 cd nearcore
 sudo ./scripts/start_stakewars.py --init --account-id=moonletX
 sudo ./scripts/start_stakewars.py --init --signer-keys --account-id=moonletX
+
+near stake moonlet1 validator_public_key 10000000000000000000
+

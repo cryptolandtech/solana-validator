@@ -105,6 +105,9 @@ gaiacli query staking validator cosmosvaloper --chain-id=gaia-1300
 #check voting progress, jailed status, ..
 gaiacli query slashing signing-info cosmosvalconspub --chain-id=gaia-13006
 
+#check if validator is jailed
+gaiacli q staking validator --validator cosmosvaloper... --trust-node
+
 #unjail in case of downtime
 gaiacli tx slashing unjail --from moonlet --chain-id=gaia-13006
 

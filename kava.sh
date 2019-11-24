@@ -41,7 +41,8 @@ get https://raw.githubusercontent.com/Kava-Labs/launch/master/kava-2/genesis.jso
 #add pm2 file
 pm2 start
 
-
+#see if caught up
+kvcli status |jq
 
 
 

@@ -36,8 +36,13 @@ iris init --moniker=titan --chain-id=irishub
 curl -o ~/.iris/config/config.toml https://raw.githubusercontent.com/irisnet/mainnet/master/config/config.toml
 curl -o ~/.iris/config/genesis.json https://raw.githubusercontent.com/irisnet/mainnet/master/config/genesis.json
 
-kvcli keys add moonlet
-kvcli keys list
+iriscli keys add moonlet
+iriscli keys list
 
 #add pm2 file
 pm2 start
+
+#see if caught up
+iriscli status | jq .sync_info.catching_up
+
+

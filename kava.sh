@@ -23,14 +23,23 @@ sudo apt upgrade -y
 sudo apt-get install -y golang-go make gcc python jq liblz4-tool npm
 sudo npm install pm2@latest -g
 
-git clone https://github.com/cosmos/cosmos-sdk.git
-cd cosmos-sdk
-git checkout v0.34.9; GO111MODULE=on; make install
+git clone https://github.com/Kava-Labs/kava.git
+cd kava
+git checkout v0.3.1 ; GO111MODULE=on; make install
 
 
 kvd init titan --chain-id kava-1
 kvcli keys add moonlet
 kvcli keys list
+
+#get genesis
+get https://raw.githubusercontent.com/Kava-Labs/launch/master/kava-2/genesis.json -P ~/.kvd/config --backups=1
+
+#seeds
+#"c6e38d744462377273926daaf36816b96596f332@34.84.191.117:26656,ab1b544f594becea2a0af3c964568431896c03a4@35.228.68.223:26656,34870045ec4bd17ac2bbad23b7c15faf0186cbd4@140.82.8.156:26656,d21edfd1bdde037a2402e2eabf064cd8cd4b49b9@54.39.182.190:26656,43a8004ece305e1d9407d00bb26958591cbf8ce2@kava01.dokia.cloud:26656,c4ff82fa0cdcc60cea7551d5c9a179926ee622ed@51.68.172.150:26656,b1bcd6969f03940032f7f9c315ff3bbc1ee8cd20@185.181.103.135:26656,aafd0790e2abdffa44852eb33f9864904affbaa5@18.197.230.170:26656,43040b8c9516e2d7fc0b95f2e070a3cb37dc6c2e@35.245.180.181:26656"
+
+#add pm2 file
+pm2 start
 
 
 

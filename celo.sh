@@ -1,5 +1,6 @@
 sudo apt update
-sudo apt install apt-transport-https ca-certificates curl software-properties-common python npm 
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt install apt-transport-https ca-certificates curl software-properties-common python npm nodejs
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"

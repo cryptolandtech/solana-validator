@@ -11,7 +11,8 @@ sudo systemctl status docker
 sudo usermod -aG docker ${USER}
 sudo npm install -g @celo/celocli
 
-docker pull us.gcr.io/celo-testnet/celo-node:alfajores
+export CELO_IMAGE=us.gcr.io/celo-testnet/celo-node:baklava
+export NETWORK_ID=12219
 mkdir celo-data-dir
 cd celo-data-dir
 
@@ -29,6 +30,7 @@ docker run -v $PWD:/root/.celo --entrypoint cp $CELO_IMAGE /celo/static-nodes.js
 
 #start node
 docker run --name celo-fullnode -d --restart always -p 127.0.0.1:8545:8545 -p 127.0.0.1:8546:8546 -p 30303:30303 -p 30303:30303/udp -v $PWD:/root/.celo $CELO_IMAGE --verbosity 3 --networkid $NETWORK_ID --syncmode full --rpc --rpcaddr 0.0.0.0 --rpcapi eth,net,web3,debug,admin,personal --lightserv 90 --lightpeers 1000 --maxpeers 1100 --etherbase $CELO_ACCOUNT_ADDRESS
+
 
 
 

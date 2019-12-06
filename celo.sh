@@ -11,53 +11,70 @@ sudo systemctl status docker
 sudo usermod -aG docker ${USER}
 sudo npm install -g @celo/celocli
 
+
 export CELO_IMAGE=us.gcr.io/celo-testnet/celo-node:baklava
 export NETWORK_ID=12219
-mkdir celo-data-dir
-cd celo-data-dir
 
-#create account
-#docker run -v $PWD:/root/.celo --entrypoint /bin/sh -it $CELO_IMAGE -c "sleep 1 && geth account new"
-
-export CELO_ACCOUNT_ADDRESS=ea267df8fbbbcd33acc8e87290e34a4d55691744
-echo "export CELO_ACCOUNT_ADDRESS=ea267df8fbbbcd33acc8e87290e34a4d55691744" >> ~/.bashrc
-
-#get genesis
-docker run -v $PWD:/root/.celo $CELO_IMAGE init /celo/genesis.json
-
-#add peer
-docker run -v $PWD:/root/.celo --entrypoint cp $CELO_IMAGE /celo/static-nodes.json /root/.celo/
-
-#start node
-docker run --name celo-fullnode -d --restart always -p 127.0.0.1:8545:8545 -p 127.0.0.1:8546:8546 -p 30303:30303 -p 30303:30303/udp -v $PWD:/root/.celo $CELO_IMAGE --verbosity 3 --networkid $NETWORK_ID --syncmode full --rpc --rpcaddr 0.0.0.0 --rpcapi eth,net,web3,debug,admin,personal --lightserv 90 --lightpeers 1000 --maxpeers 1100 --etherbase $CELO_ACCOUNT_ADDRESS
-
-#run a validator
-
-#unlock the keys
-celocli account:unlock --account ea267df8fbbbcd33acc8e87290e34a4d55691744
-
-echo "export CELO_IMAGE=us.gcr.io/celo-testnet/celo-node:baklava" >~/.bashrc
-echo "export NETWORK_ID=12219" >~/.bashrc
-source ~/.bashrc
-
-
-
-#pull docker image
 docker pull $CELO_IMAGE
 
-#create 2 more accounts
 mkdir celo-accounts-node
 cd celo-accounts-node
 docker run -v $PWD:/root/.celo --entrypoint /bin/sh -it $CELO_IMAGE -c "sleep 1 && geth account new"
 docker run -v $PWD:/root/.celo --entrypoint /bin/sh -it $CELO_IMAGE -c "sleep 1 && geth account new"
 
-echo "export CELO_VALIDATOR_GROUP_ADDRESS=" >> ~/.bashrc
-echo "export CELO_VALIDATOR_ADDRESS=" >> ~/.bashrc
+echo "export CELO_VALIDATOR_GROUP_ADDRESS=" > ~/.bashrc
+echo "export CELO_VALIDATOR_ADDRESS=" > ~/.bashrc
 source ~/.bashrc
 
-#generate proof of posesion
-$ docker run -v `pwd`:/root/.celo --entrypoint /bin/sh -it us.gcr.io/celo-testnet/celo-node:alfajores -c "geth account proof-of-possession $CELO_VALIDATOR_ADDRESS"
-echo "export CELO_VALIDATOR_POP=" >> ~/.bashrc
+# genesis and peers
+docker run -v $PWD:/root/.celo $CELO_IMAGE init /celo/genesis.json
+docker run -v $PWD:/root/.celo --entrypoint cp $CELO_IMAGE /celo/static-nodes.json /root/.celo/
+
+#run the node
+# On your local machine
+docker run --name celo-accounts --restart always -p 8545:8545 -v $PWD:/root/.celo $CELO_IMAGE --verbosity 3 --networkid $NETWORK_ID --syncmode full --rpc --rpcaddr 0.0.0.0 --rpcapi eth,net,web3,debug,admin,personal
+
+#run a validator
+
+export CELO_IMAGE=us.gcr.io/celo-testnet/celo-node:baklava
+export NETWORK_ID=12219
+mkdir celo-validator-node
+cd celo-validator-node
+docker run -v $PWD:/root/.celo $CELO_IMAGE init /celo/genesis.json
+docker run -v $PWD:/root/.celo --entrypoint /bin/sh -it $CELO_IMAGE -c "sleep 1 && geth account new"
+echo "export CELO_VALIDATOR_SIGNER_ADDRESS=" > ~/.bashrc
 source ~/.bashrc
 
+#create proof of possession
+#export CELO_VALIDATOR_ADDRESS=<CELO-VALIDATOR-ADDRESS>
+docker run -v $PWD:/root/.celo --entrypoint /bin/sh -it $CELO_IMAGE -c "geth account proof-of-possession $CELO_VALIDATOR_SIGNER_ADDRESS $CELO_VALIDATOR_ADDRESS"
+
+#save keys
+
+echo "export CELO_VALIDATOR_SIGNER_ADDRESS=" > ~/.bashrc
+echo "export CELO_VALIDATOR_SIGNER_SIGNATURE=" > ~/.bashrc
+echo "export CELO_VALIDATOR_SIGNER_PUBLIC_KEY=" > ~/.bashrc
+source ~/.bashrc
+
+#prove possession
+docker run -v $PWD:/root/.celo --entrypoint /bin/sh -it $CELO_IMAGE -c "geth account proof-of-possession $CELO_VALIDATOR_SIGNER_ADDRESS $CELO_VALIDATOR_ADDRESS --bls"
+
+#save signatures
+echo "export CELO_VALIDATOR_SIGNER_BLS_SIGNATURE=" > ~/.bashrc
+echo "export CELO_VALIDATOR_SIGNER_BLS_PUBLIC_KEY=" > ~/.bashrc
+source ~/.bashrc
+
+#unlock the keys
+#celocli account:unlock --account ea267df8fbbbcd33acc8e87290e34a4d55691744
+
+
+### proxy ###
+
+echo "export CELO_IMAGE=us.gcr.io/celo-testnet/celo-node:baklava" > ~/.bashrc
+source ~/.bashrc
+
+mkdir celo-proxy-node
+cd celo-proxy-node
+docker run -v $PWD:/root/.celo $CELO_IMAGE init /celo/genesis.json
+docker run -v $PWD:/root/.celo --entrypoint cp $CELO_IMAGE /celo/static-nodes.json /root/.celo/
 

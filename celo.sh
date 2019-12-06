@@ -31,24 +31,25 @@ docker run -v $PWD:/root/.celo --entrypoint cp $CELO_IMAGE /celo/static-nodes.js
 #start node
 docker run --name celo-fullnode -d --restart always -p 127.0.0.1:8545:8545 -p 127.0.0.1:8546:8546 -p 30303:30303 -p 30303:30303/udp -v $PWD:/root/.celo $CELO_IMAGE --verbosity 3 --networkid $NETWORK_ID --syncmode full --rpc --rpcaddr 0.0.0.0 --rpcapi eth,net,web3,debug,admin,personal --lightserv 90 --lightpeers 1000 --maxpeers 1100 --etherbase $CELO_ACCOUNT_ADDRESS
 
-
-
-
-
-
-
-
 #run a validator
+
+#unlock the keys
+celocli account:unlock --account ea267df8fbbbcd33acc8e87290e34a4d55691744
+
+echo "export CELO_IMAGE=us.gcr.io/celo-testnet/celo-node:baklava" >~/.bashrc
+echo "export NETWORK_ID=12219" >~/.bashrc
+source ~/.bashrc
+
+
+
 #pull docker image
-docker pull us.gcr.io/celo-testnet/celo-node:alfajores
+docker pull $CELO_IMAGE
 
 #create 2 more accounts
-cd ~/celo-dir-data
-docker run -v `pwd`:/root/.celo --entrypoint /bin/sh -it us.gcr.io/celo-testnet/celo-node:alfajores 
-geth account new
-
-docker run -v `pwd`:/root/.celo --entrypoint /bin/sh -it us.gcr.io/celo-testnet/celo-node:alfajores 
-geth account new
+mkdir celo-accounts-node
+cd celo-accounts-node
+docker run -v $PWD:/root/.celo --entrypoint /bin/sh -it $CELO_IMAGE -c "sleep 1 && geth account new"
+docker run -v $PWD:/root/.celo --entrypoint /bin/sh -it $CELO_IMAGE -c "sleep 1 && geth account new"
 
 echo "export CELO_VALIDATOR_GROUP_ADDRESS=" >> ~/.bashrc
 echo "export CELO_VALIDATOR_ADDRESS=" >> ~/.bashrc

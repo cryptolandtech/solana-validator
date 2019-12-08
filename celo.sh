@@ -109,5 +109,5 @@ celocli account:balance $CELO_VALIDATOR_ADDRESS
 # On your local machine
 celocli account:unlock --account $CELO_VALIDATOR_GROUP_ADDRESS
 celocli account:unlock --account $CELO_VALIDATOR_ADDRESS
-celocli account:register --from $CELO_VALIDATOR_GROUP_ADDRESS --name <NAME YOUR VALIDATOR GROUP>
-celocli account:register --from $CELO_VALIDATOR_ADDRESS --name <NAME YOUR VALIDATOR>
+celocli account:register --from $CELO_VALIDATOR_GROUP_ADDRESS --name moonlet
+celocli account:register --from $CELO_VALIDATOR_ADDRESS --name moonlet1

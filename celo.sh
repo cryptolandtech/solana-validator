@@ -128,10 +128,31 @@ celocli lockedgold:show $CELO_VALIDATOR_ADDRESS
 
 
 #run for election
-#register validator key
+#register validator signing key
 celocli account:authorize --from $CELO_VALIDATOR_ADDRESS --role validator --signature 0x$CELO_VALIDATOR_SIGNER_SIGNATURE --signer 0x$CELO_VALIDATOR_SIGNER_ADDRESS
 
 #check key
 celocli account:show $CELO_VALIDATOR_ADDRESS
+
+#register group
+celocli validatorgroup:register --from $CELO_VALIDATOR_GROUP_ADDRESS --commission 0.1
+
+# show group
+celocli validatorgroup:show $CELO_VALIDATOR_GROUP_ADDRESS
+
+#register validator
+celocli validator:register --from $CELO_VALIDATOR_ADDRESS --ecdsaKey $CELO_VALIDATOR_SIGNER_PUBLIC_KEY --blsKey $CELO_VALIDATOR_SIGNER_BLS_PUBLIC_KEY --blsSignature $CELO_VALIDATOR_SIGNER_BLS_SIGNATURE
+
+# afiliate validator to group
+celocli validator:affiliate $CELO_VALIDATOR_GROUP_ADDRESS --from $CELO_VALIDATOR_ADDRESS
+
+#accept affiliation
+celocli validatorgroup:member --accept $CELO_VALIDATOR_ADDRESS --from $CELO_VALIDATOR_GROUP_ADDRESS
+
+#check if validator is part of the group
+celocli validator:show $CELO_VALIDATOR_ADDRESS
+celocli validatorgroup:show $CELO_VALIDATOR_GROUP_ADDRESS
+
+
 
 

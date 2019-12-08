@@ -194,5 +194,17 @@ docker run -v $PWD:/root/.celo -it $CELO_IMAGE account new
 echo "export CELO_ATTESTATION_SIGNER_ADDRESS=<YOUR-ATTESTATION-SIGNER-ADDRESS>" >> ~/.bashrc
 source ~/.bashrc
 
+#generate proof of possession
+docker run -v $PWD:/root/.celo -it $CELO_IMAGE account proof-of-possession $CELO_ATTESTATION_SIGNER_ADDRESS $CELO_VALIDATOR_ADDRESS
+
+# Authorize the attestation signer on the validator vm***
+echo "export CELO_ATTESTATION_SIGNER_SIGNATURE= >> "~/.bashrc
+echo "export CELO_ATTESTATION_SIGNER_ADDRESS= >> "~/.bashrc
+source ~/.bashrc
+celocli account:authorize --from $CELO_VALIDATOR_ADDRESS --role attestation --signature 0x$CELO_ATTESTATION_SIGNER_SIGNATURE --signer 0x$CELO_ATTESTATION_SIGNER_ADDRESS
+
+#run the atestation service
+echo <ATTESTATION-SIGNER-PASSWORD> > .password
+docker run --name celo-attestations -it --restart always -p 8545:8545 -v $PWD:/root/.celo $CELO_IMAGE --verbosity 3 --networkid $NETWORK_ID --syncmode full --rpc --rpcaddr 0.0.0.0 --rpcapi eth,net,web3,debug,admin --unlock $CELO_ATTESTATION_SIGNER_ADDRESS --password /root/.celo/.password
 
 

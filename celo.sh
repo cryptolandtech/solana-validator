@@ -170,3 +170,20 @@ celocli election:activate --from $CELO_VALIDATOR_ADDRESS --wait && celocli elect
 celocli election:show $CELO_VALIDATOR_GROUP_ADDRESS --voter
 celocli election:show $CELO_VALIDATOR_ADDRESS --voter
 
+#check rewards
+celocli lockedgold:show $CELO_VALIDATOR_GROUP_ADDRESS
+celocli lockedgold:show $CELO_VALIDATOR_ADDRESS
+
+#see election list
+celocli election:list
+
+#check elected validators
+celocli election:current
+
+### Atestation service ###
+
+
+
+
+
+

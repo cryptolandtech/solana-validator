@@ -109,5 +109,29 @@ celocli account:balance $CELO_VALIDATOR_ADDRESS
 # On your local machine
 celocli account:unlock --account $CELO_VALIDATOR_GROUP_ADDRESS
 celocli account:unlock --account $CELO_VALIDATOR_ADDRESS
+
+#register name
 celocli account:register --from $CELO_VALIDATOR_GROUP_ADDRESS --name moonlet
 celocli account:register --from $CELO_VALIDATOR_ADDRESS --name moonlet1
+
+# show details
+celocli account:show $CELO_VALIDATOR_GROUP_ADDRESS
+celocli account:show $CELO_VALIDATOR_ADDRESS
+
+# Lock up gold
+celocli lockedgold:lock --from $CELO_VALIDATOR_GROUP_ADDRESS --value 10000000000000000000000
+celocli lockedgold:lock --from $CELO_VALIDATOR_ADDRESS --value 10000000000000000000000
+
+#show lock details
+celocli lockedgold:show $CELO_VALIDATOR_GROUP_ADDRESS
+celocli lockedgold:show $CELO_VALIDATOR_ADDRESS
+
+
+#run for election
+#register validator key
+celocli account:authorize --from $CELO_VALIDATOR_ADDRESS --role validator --signature 0x$CELO_VALIDATOR_SIGNER_SIGNATURE --signer 0x$CELO_VALIDATOR_SIGNER_ADDRESS
+
+#check key
+celocli account:show $CELO_VALIDATOR_ADDRESS
+
+

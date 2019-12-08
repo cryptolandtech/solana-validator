@@ -22,8 +22,8 @@ cd celo-accounts-node
 docker run -v $PWD:/root/.celo --entrypoint /bin/sh -it $CELO_IMAGE -c "sleep 1 && geth account new"
 docker run -v $PWD:/root/.celo --entrypoint /bin/sh -it $CELO_IMAGE -c "sleep 1 && geth account new"
 
-echo "export CELO_VALIDATOR_GROUP_ADDRESS=" > ~/.bashrc
-echo "export CELO_VALIDATOR_ADDRESS=" > ~/.bashrc
+echo "export CELO_VALIDATOR_GROUP_ADDRESS=" >> ~/.bashrc
+echo "export CELO_VALIDATOR_ADDRESS=" >> ~/.bashrc
 source ~/.bashrc
 
 # genesis and peers
@@ -42,7 +42,7 @@ mkdir celo-validator-node
 cd celo-validator-node
 docker run -v $PWD:/root/.celo $CELO_IMAGE init /celo/genesis.json
 docker run -v $PWD:/root/.celo --entrypoint /bin/sh -it $CELO_IMAGE -c "sleep 1 && geth account new"
-echo "export CELO_VALIDATOR_SIGNER_ADDRESS=" > ~/.bashrc
+echo "export CELO_VALIDATOR_SIGNER_ADDRESS=" >> ~/.bashrc
 source ~/.bashrc
 
 #create proof of possession
@@ -51,17 +51,17 @@ docker run -v $PWD:/root/.celo --entrypoint /bin/sh -it $CELO_IMAGE -c "geth acc
 
 #save keys
 
-echo "export CELO_VALIDATOR_SIGNER_ADDRESS=" > ~/.bashrc
-echo "export CELO_VALIDATOR_SIGNER_SIGNATURE=" > ~/.bashrc
-echo "export CELO_VALIDATOR_SIGNER_PUBLIC_KEY=" > ~/.bashrc
+echo "export CELO_VALIDATOR_SIGNER_ADDRESS=" >> ~/.bashrc
+echo "export CELO_VALIDATOR_SIGNER_SIGNATURE=" >> ~/.bashrc
+echo "export CELO_VALIDATOR_SIGNER_PUBLIC_KEY=" >> ~/.bashrc
 source ~/.bashrc
 
 #prove possession
 docker run -v $PWD:/root/.celo --entrypoint /bin/sh -it $CELO_IMAGE -c "geth account proof-of-possession $CELO_VALIDATOR_SIGNER_ADDRESS $CELO_VALIDATOR_ADDRESS --bls"
 
 #save signatures
-echo "export CELO_VALIDATOR_SIGNER_BLS_SIGNATURE=" > ~/.bashrc
-echo "export CELO_VALIDATOR_SIGNER_BLS_PUBLIC_KEY=" > ~/.bashrc
+echo "export CELO_VALIDATOR_SIGNER_BLS_SIGNATURE=" >> ~/.bashrc
+echo "export CELO_VALIDATOR_SIGNER_BLS_PUBLIC_KEY=" >> ~/.bashrc
 source ~/.bashrc
 
 #unlock the keys
@@ -70,7 +70,7 @@ source ~/.bashrc
 
 ### proxy ###
 
-echo "export CELO_IMAGE=us.gcr.io/celo-testnet/celo-node:baklava" > ~/.bashrc
+echo "export CELO_IMAGE=us.gcr.io/celo-testnet/celo-node:baklava" >> ~/.bashrc
 source ~/.bashrc
 
 mkdir celo-proxy-node
@@ -91,8 +91,8 @@ docker run --name celo-proxy --restart always -p 30313:30303 -p 30313:30303/udp 
 echo $(docker exec celo-proxy geth --exec "admin.nodeInfo['enode'].split('//')[1].split('@')[0]" attach | tr -d '"')
 #echo $(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' celo-proxy)
 
-echo "export PROXY_ENODE=" > ~/.bashrc
-echo "export export PROXY_IP==" > ~/.bashrc
+echo "export PROXY_ENODE=" >> ~/.bashrc
+echo "export export PROXY_IP==" >> ~/.bashrc
 source ~/.bashrc
 
 #on the Validator, connect to proxy
@@ -182,8 +182,17 @@ celocli election:current
 
 ### Atestation service ###
 
-
-
+echo "export CELO_IMAGE=us.gcr.io/celo-testnet/celo-node:baklava" >> ~/.bashrc
+echo "export NETWORK_ID=12219" >> ~/.bashrc
+echo "export CELO_VALIDATOR_ADDRESS=<CELO_VALIDATOR_ADDRESS>" >> ~/.bashrc
+source ~/.bashrc
+mkdir celo-attestations-node
+cd celo-attestations-node
+docker run -v $PWD:/root/.celo $CELO_IMAGE init /celo/genesis.json
+docker run -v $PWD:/root/.celo --entrypoint cp $CELO_IMAGE /celo/static-nodes.json /root/.celo/
+docker run -v $PWD:/root/.celo -it $CELO_IMAGE account new
+echo "export CELO_ATTESTATION_SIGNER_ADDRESS=<YOUR-ATTESTATION-SIGNER-ADDRESS>" >> ~/.bashrc
+source ~/.bashrc
 
 
 

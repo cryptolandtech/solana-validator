@@ -100,3 +100,14 @@ source ~/.bashrc
 echo <VALIDATOR-SIGNER-PASSWORD> > .password
 docker run --name celo-validator --restart always -p 30303:30303 -p 30303:30303/udp -v $PWD:/root/.celo $CELO_IMAGE --verbosity 3 --networkid $NETWORK_ID --syncmode full --mine --istanbul.blockperiod=5 --istanbul.requesttimeout=3000 --etherbase $CELO_VALIDATOR_SIGNER_ADDRESS --nodiscover --proxy.proxied --proxy.proxyenodeurlpair=enode://$PROXY_ENODE@$PROXY_IP:30503\;enode://$PROXY_ENODE@$PROXY_IP:30303  --unlock=$CELO_VALIDATOR_SIGNER_ADDRESS --password /root/.celo/.password --ethstats=<YOUR-VALIDATOR-NAME>@baklava-ethstats.celo-testnet.org
 
+
+#check balance
+celocli account:balance $CELO_VALIDATOR_GROUP_ADDRESS
+celocli account:balance $CELO_VALIDATOR_ADDRESS
+
+#unlock accounts
+# On your local machine
+celocli account:unlock --account $CELO_VALIDATOR_GROUP_ADDRESS
+celocli account:unlock --account $CELO_VALIDATOR_ADDRESS
+celocli account:register --from $CELO_VALIDATOR_GROUP_ADDRESS --name <NAME YOUR VALIDATOR GROUP>
+celocli account:register --from $CELO_VALIDATOR_ADDRESS --name <NAME YOUR VALIDATOR>

@@ -153,6 +153,20 @@ celocli validatorgroup:member --accept $CELO_VALIDATOR_ADDRESS --from $CELO_VALI
 celocli validator:show $CELO_VALIDATOR_ADDRESS
 celocli validatorgroup:show $CELO_VALIDATOR_GROUP_ADDRESS
 
+#authorize vote signer
+celocli election:vote --from $CELO_VALIDATOR_ADDRESS --for $CELO_VALIDATOR_GROUP_ADDRESS --value 10000000000000000000000
+celocli election:vote --from $CELO_VALIDATOR_GROUP_ADDRESS --for $CELO_VALIDATOR_GROUP_ADDRESS --value 10000000000000000000000
 
+#doublecheck the votes cast successfully
+# On your local machine
+celocli election:show $CELO_VALIDATOR_GROUP_ADDRESS --group
+celocli election:show $CELO_VALIDATOR_GROUP_ADDRESS --voter
+celocli election:show $CELO_VALIDATOR_ADDRESS --voter
 
+#submit transaction to enable rewards
+celocli election:activate --from $CELO_VALIDATOR_ADDRESS --wait && celocli election:activate --from $CELO_VALIDATOR_GROUP_ADDRESS --wait
+
+#check vote activation
+celocli election:show $CELO_VALIDATOR_GROUP_ADDRESS --voter
+celocli election:show $CELO_VALIDATOR_ADDRESS --voter
 

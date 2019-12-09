@@ -11,8 +11,13 @@ sudo apt upgrade -y
 sudo apt-get install -y golang-go make gcc python jq liblz4-tool npm
 sudo npm install pm2@latest -g
 
+go get -d github.com/ovrclk/akash
+cd $GOPATH/src/github.com/ovrclk/akash
+make deps-install
+make install
 
-
+akash key list
+akash query account
 
 
 

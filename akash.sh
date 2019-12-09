@@ -20,6 +20,88 @@ akash key list
 akash query account
 
 
+Deployment
+==========
+
+Deployment ID:          e6825d36473dd2c01d169767ba00e71ff2a26b1bc34128893597a84c13a18813          
+Deployment Groups(s):   Group:          global                                                      
+                        Requirements:                                                               
+                        Resources:      Count:          1                                                   
+                                        Price:          500                                                 
+                                        CPU:            250                                                 
+                                        Memory:         536870912                                           
+                                        Disk:           1000000000                                          
+Fulfillment(s):         GROUP   PRICE   PROVIDER                                                        
+                        1       26      a34ee2789ba2e507656929c104e001d0cd42f3e7e5368672799397a9584a9b42
+                        1       50      83cdd5cb917b893e3e1bc15c47c6ded88e6954e639aba453102aecbf98abc4e5
+
+Lease(s)
+========
+
+Lease ID:       e6825d36473dd2c01d169767ba00e71ff2a26b1bc34128893597a84c13a18813/1/2/a34ee2789ba2e507656929c104e001d0cd42f3e7e5368672799397a9584a9b42
+Services(s):    NAME    HOST(S) / IP(S)                                 AVAILABLE       TOTAL                                                                          
+                web     x7qwayv8urw5z6dccn9yjj.kant.akashtest.net       0               1                                                                              
+                web     147.75.78.35                                    0               1                                                                              
+
+
+
+
+
+
+Deployment
+==========
+
+Deployment ID:          5c9897def26102a9cc785dd7257ee2d3a59ef8e8b61191c7cc50c6e18b364005          
+Deployment Groups(s):   Group:          global                                                      
+                        Requirements:                                                               
+                        Resources:      Count:          1                                                   
+                                        Price:          500                                                 
+                                        CPU:            1000                                                
+                                        Memory:         1073741824                                          
+                                        Disk:           1000000000                                          
+Fulfillment(s):         Group:          1                                                               
+                        Price:          66                                                              
+                        Provider:       d4a9d2283e2d6a442c95d7593ec9ad7bd22b68eca41905f1154b05d12430fa67
+
+Lease(s)
+========
+
+Lease ID:       5c9897def26102a9cc785dd7257ee2d3a59ef8e8b61191c7cc50c6e18b364005/1/2/d4a9d2283e2d6a442c95d7593ec9ad7bd22b68eca41905f1154b05d12430fa67
+Services(s):    NAME    HOST(S) / IP(S)                                 AVAILABLE       TOTAL                                                                      
+                synapse akash2.moonlet.network                          0               0                                                                          
+                synapse cbl7fe9zvnxav7vhejjacq.plato.akashtest.net      0               0                                                                          
+                synapse 147.75.80.62                                    0               0                                                                          
+
+
+
+
+
+
+
+Deployment
+==========
+
+Deployment ID:          67f5cfd3caf058d75bd30c4da0ad6a5debbdba6dfbcf4e5e94efa300cf285ffd          
+Deployment Groups(s):   Group:          global                                                      
+                        Requirements:                                                               
+                        Resources:      Count:          1                                                   
+                                        Price:          500                                                 
+                                        CPU:            1000                                                
+                                        Memory:         1073741824                                          
+                                        Disk:           1000000000                                          
+Fulfillment(s):         GROUP   PRICE   PROVIDER                                                        
+                        1       134     a033e7b1768b2d05c26a71754c2811f6758b6f6434b1f5cbc2d7f25dbc2607e1
+                        1       123     a34ee2789ba2e507656929c104e001d0cd42f3e7e5368672799397a9584a9b42
+
+Lease(s)
+========
+
+Lease ID:       67f5cfd3caf058d75bd30c4da0ad6a5debbdba6dfbcf4e5e94efa300cf285ffd/1/2/d4a9d2283e2d6a442c95d7593ec9ad7bd22b68eca41905f1154b05d12430fa67
+Services(s):    NAME    HOST(S) / IP(S)                                 AVAILABLE       TOTAL                                                                      
+                synapse akash2.moonlet.network                          0               0                                                                          
+                synapse q99aqvz588ckuydshkgfdj.plato.akashtest.net      0               0                                                                          
+                synapse 147.75.80.62                                    0               0                                                                          
+
 
 
 

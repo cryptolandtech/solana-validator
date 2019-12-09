@@ -1,15 +1,3 @@
-#cosmos  Cosmos Account Address
-#cosmospub  Cosmos Account Public Key
-#cosmosvalcons  Cosmos Validator Consensus Address
-#cosmosvalconspub  Cosmos Validator Consensus Public Key
-#cosmosvaloper  Cosmos Validator Operator Address
-#cosmosvaloperpub  Cosmos Validator Operator Public Key
-
-echo '* soft nofile 65536' | sudo tee -a /etc/security/limits.conf
-echo '* hard nofile 65536' | sudo tee -a /etc/security/limits.conf
-echo 'session required pam_limits.so' | sudo tee -a /etc/pam.d/common-session
-prlimit --pid `pidof gaiad` --nofile=65536:65536
-
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
 echo "export GOPATH=$HOME/go" >> ~/.bashrc
@@ -22,6 +10,14 @@ sudo apt upgrade -y
 #go 1.13
 sudo apt-get install -y golang-go make gcc python jq liblz4-tool npm
 sudo npm install pm2@latest -g
+
+
+
+
+
+
+
+
 
 git clone https://github.com/cosmos/cosmos-sdk.git
 cd cosmos-sdk

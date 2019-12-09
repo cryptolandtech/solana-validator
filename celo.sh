@@ -207,4 +207,7 @@ celocli account:authorize --from $CELO_VALIDATOR_ADDRESS --role attestation --si
 echo <ATTESTATION-SIGNER-PASSWORD> > .password
 docker run --name celo-attestations -it --restart always -p 8545:8545 -v $PWD:/root/.celo $CELO_IMAGE --verbosity 3 --networkid $NETWORK_ID --syncmode full --rpc --rpcaddr 0.0.0.0 --rpcapi eth,net,web3,debug,admin --unlock $CELO_ATTESTATION_SIGNER_ADDRESS --password /root/.celo/.password
 
+#get the peer count
+docker exec -ti celo-proxy geth attach --exec "net"
+
 

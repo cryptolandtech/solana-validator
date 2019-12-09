@@ -84,7 +84,7 @@ export NETWORK_ID=12219
 echo "export CELO_VALIDATOR_SIGNER_ADDRESS=f49e1283350c618c3ac84fbfecc90b1f8b6adfaa" >> ~/.bashrc
 source ~/.bashrc
 
-docker run --name celo-proxy --restart always -p 30313:30303 -p 30313:30303/udp -p 30503:30503 -p 30503:30503/udp -v $PWD:/root/.celo $CELO_IMAGE --verbosity 3 --networkid $NETWORK_ID --syncmode full --proxy.proxy --proxy.proxiedvalidatoraddress $CELO_VALIDATOR_SIGNER_ADDRESS --proxy.internalendpoint :30503 --etherbase $CELO_VALIDATOR_SIGNER_ADDRESS --ethstats=moonlet-proxy@baklava-ethstats.celo-testnet.org
+docker run --name celo-proxy --restart always -p 30303:30303 -p 30303:30303/udp -p 30503:30503 -p 30503:30503/udp -v $PWD:/root/.celo $CELO_IMAGE --verbosity 3 --networkid $NETWORK_ID --syncmode full --proxy.proxy --proxy.proxiedvalidatoraddress $CELO_VALIDATOR_SIGNER_ADDRESS --proxy.internalendpoint :30503 --etherbase $CELO_VALIDATOR_SIGNER_ADDRESS --ethstats=moonlet-proxy@baklava-ethstats.celo-testnet.org
 
 
 # get enode and ip

@@ -44,6 +44,32 @@ Services(s):    NAME    HOST(S) / IP(S)                                 AVAILABL
                 web     147.75.78.35                                    0               1                                                                              
 
 
+Deployment
+==========
+
+Deployment ID:          92f2f8ee927f6b6c0584cf58201594eff0430e3728d07118d2f73b4db81008dc          
+Deployment Groups(s):   Group:          global                                                      
+                        Requirements:                                                               
+                        Resources:      Count:          1                                                   
+                                        Price:          500                                                 
+                                        CPU:            250                                                 
+                                        Memory:         536870912                                           
+                                        Disk:           1000000000                                          
+Fulfillment(s):         GROUP   PRICE   PROVIDER                                                        
+                        1       27      a033e7b1768b2d05c26a71754c2811f6758b6f6434b1f5cbc2d7f25dbc2607e1
+                        1       28      a34ee2789ba2e507656929c104e001d0cd42f3e7e5368672799397a9584a9b42
+                        1       29      6eaef3c002f468c46de628705f010d837e5468e9ea43a3997968026b5b5584fb
+
+Lease(s)
+========
+
+Lease ID:       92f2f8ee927f6b6c0584cf58201594eff0430e3728d07118d2f73b4db81008dc/1/2/6a3d63710e810f52937867ca805fd1295ece6f3770adeb69d78d8602d509c327
+Services(s):    NAME    HOST(S) / IP(S)                                         AVAILABLE       TOTAL                                                                   
+                web     akash.moonlet.network                                   0               0                                                                       
+                web     9mhww2nerqlzwvj9m9g7ps.akashdevnet1.kysenpool.io        0               0                                                                       
+                web     147.75.74.207                                           0               0                                                                       
+
+
 
 
 

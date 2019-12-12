@@ -222,4 +222,7 @@ docker run --name celo-attestation-service -it --restart always --entrypoint /bi
 #get the peer count
 docker exec -ti celo-proxy geth attach --exec "net"
 
+#get blok number
+docker exec -ti celo-accounts geth attach --exec "eth.blockNumber"
+echo $((`curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' -H "Content-type: application/json" localhost:8545 |jq -r '.result'`))
 

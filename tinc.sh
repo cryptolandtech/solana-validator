@@ -1,3 +1,4 @@
+## https://florianjensen.com/2018/03/30/set-up-tinc-on-ubuntu/ 
 #vm1 celop
 apt-get update
 apt-get install tinc

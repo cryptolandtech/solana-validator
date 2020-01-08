@@ -361,3 +361,16 @@ solana-keygen new -o ~/validator-stake-keypair.json
 #wait to catchup & delegate
 echo "me: $(solana --url http://127.0.0.1:8899 get-slot | grep '^[0-9]\+$'), cluster: $(solana --url http://tds.solana.com:8899 get-slot | grep '^[0-9]\+$')"
 solana --keypair ~/validator-keypair.json --url http://tds.solana.com:8899 delegate-stake ~/validator-stake-keypair.json ~/validator-vote-keypair.json 8589934592
+
+
+
+###DR6
+
+https://docs.solana.com/tour-de-sol/participation/steps-to-create-a-validator/delegating-stake
+
+#shows nice statistics
+solana show-block-production
+
+
+
+

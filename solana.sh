@@ -371,6 +371,7 @@ https://docs.solana.com/tour-de-sol/participation/steps-to-create-a-validator/de
 #shows nice statistics
 solana show-block-production
 
-
+#publish info
+solana validator-info publish Moonlet -u http://tds.solana.com:8899 --website "http://moonlet.xyz"
 
 

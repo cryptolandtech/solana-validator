@@ -224,6 +224,10 @@ celocli account:claim-account ./metadata.json --address 0x$CELO_VALIDATOR_GROUP_
 celocli account:register-metadata --url <METADATA_URL> --from $CELO_VALIDATOR_ADDRESS
 
 
+#test atestation
+
+celocli identity:test-attestation-service --from $CELO_VALIDATOR_ADDRESS --phoneNumber <YOUR-PHONE-NUMBER-E164-FORMAT> --message <YOUR_MESSAGE>
+
 
 
 #get the peer count

@@ -40,6 +40,6 @@ telegraf.conf
 # Output Plugin InfluxDB
 [[outputs.influxdb]]
   database = "telegraf"
-  urls = [ "http://172.31.22.151:8086" ]
+  urls = [ "http:///18.203.187.232:8086" ]
   username = ""
   password = ""

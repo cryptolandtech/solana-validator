@@ -259,3 +259,5 @@ curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","metho
 celocli rewards:show --validator=$CELO_VALIDATOR_ADDRESS
 
 celocli exchange:dollars --value 100 --from $CELO_VALIDATOR_GROUP_ADDRESS
+
+solana-keygen recover

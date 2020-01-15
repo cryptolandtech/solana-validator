@@ -256,4 +256,6 @@ curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","metho
 curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' localhost:8545
 curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"net_peerCount","params":[],"id":1}' localhost:8545
 
+celocli rewards:show --validator=$CELO_VALIDATOR_ADDRESS
+
 celocli exchange:dollars --value 100 --from $CELO_VALIDATOR_GROUP_ADDRESS

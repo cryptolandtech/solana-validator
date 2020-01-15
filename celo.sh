@@ -230,10 +230,30 @@ celocli identity:test-attestation-service --from $CELO_VALIDATOR_ADDRESS --phone
 
 
 
+
+celocli election:current
+celocli election:list
+
 #get the peer count
 docker exec -ti celo-proxy geth attach --exec "net"
 
 #get blok number
 docker exec -ti celo-accounts geth attach --exec "eth.blockNumber"
 echo $((`curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' -H "Content-type: application/json" localhost:8545 |jq -r '.result'`))
+
+
+celocli validatorgroup:show $CELO_VALIDATOR_GROUP_ADDRESS
+celocli validator:show $CELO_VALIDATOR_ADDRESS
+celocli validator:status --validator $CELO_VALIDATOR_ADDRESS
+
+docker run -ti <containername> <above geth command>
+geth attach --exec eth.blocknumber # should go up ;)
+geth attach --exec eth.syncing # should be false
+geth attach --exec net.peerCount # should be 1 for validator and a lot higher for proxy
+
+#if rpc is enabled you can also do this with 
+curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":1}' localhost:8545
+curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' localhost:8545
+curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"net_peerCount","params":[],"id":1}' localhost:8545
+
 

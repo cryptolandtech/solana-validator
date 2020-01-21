@@ -4,9 +4,10 @@ EOF
 sudo curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
 sudo apt-get update
 sudo apt-get -y install telegraf
+sudo systemctl restart telegraf
 sudo systemctl enable --now telegraf
 sudo systemctl status telegraf
-sudo systemctl restart telegraf
+
 
 
 

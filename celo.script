@@ -1,0 +1,78 @@
+cat fullnode.sh 
+# install docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+sudo apt update
+apt-cache policy docker-ce
+sudo apt install -y docker-ce
+sudo systemctl start docker
+sudo systemctl status docker
+
+# disable password login
+grep -q "^[^#]*PasswordAuthentication" /etc/ssh/sshd_config && sed -i "/^[^#]*PasswordAuthentication[[:space:]]yes/c\PasswordAuthentication no" /etc/ssh/sshd_config || echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
+service sshd restart
+
+#setup env
+export CELO_IMAGE=us.gcr.io/celo-testnet/celo-node:baklava
+export NETWORK_ID=200110
+
+# pull docker image
+docker pull $CELO_IMAGE
+
+#c reate data folder
+mkdir ~/celo-data-dir
+cd ~/celo-data-dir
+
+# create password file
+echo "MoonletGoldDigger" > password
+export CELO_ACCOUNT_ADDRESS=`docker run -v $PWD:/root/.celo --rm -it $CELO_IMAGE account new --password /root/.celo/password | grep 'Address:' | awk '{print $2}' | grep -o '[0-9a-z]\+'`
+
+# register node
+# curl -> 
+
+# setup genesis and boot nodes
+docker run -v $PWD:/root/.celo --rm $CELO_IMAGE init /celo/genesis.json
+export BOOTNODE_ENODES=`docker run --rm --entrypoint cat $CELO_IMAGE /celo/bootnodes`
+
+# copy + unzip
+WORKDIR=/root/celo-data-dir
+
+wget -O $WORKDIR/geth.tgz 192.168.0.2:8000/geth.tgz
+tar xzf $WORKDIR/geth.tgz -C $WORKDIR
+rm -rf WORKDIR/geth.tgz
+
+# run node
+docker run --name celo-fullnode -d --restart always -p 127.0.0.1:8545:8545 -p 127.0.0.1:8546:8546 -p 30303:30303 -p 30303:30303/udp -v $PWD:/root/.celo $CELO_IMAGE --verbosity 3 --networkid $NETWORK_ID --syncmode full --rpc --rpcaddr 0.0.0.0 --rpcapi eth,net,web3,debug,admin,personal --lightserv 90 --lightpeers 1000 --maxpeers 1100 --etherbase $CELO_ACCOUNT_ADDRESS --bootnodes $BOOTNODE_ENODES
+
+
+
+---------------
+
+cat new-ledger.sh 
+#!/bin/bash
+# Tobe used in cron to make a new ledger copy
+
+LEDGER_DIR=/root/celo-data-dir/geth/
+LEDGER=chaindata
+
+echo "Stop docker container"
+docker stop celo-fullnode
+
+echo "Making sure /tmp/geth exists"
+mkdir -p /tmp/geth
+
+echo "Copy ledger $LEDGER_DIR$LEDGER to /tmp/geth"
+cp -rp "$LEDGER_DIR$LEDGER" /tmp/geth/
+
+echo "Starting docker container"
+docker start celo-fullnode
+
+echo "Creating ledger archive"
+cd /tmp/
+/bin/tar czf _geth.tgz geth/$LEDGER
+mv _geth.tgz temp/geth.tgz
+
+echo "Remove temp ledger folder"
+rm -rf /tmp/temp/geth
+
+echo "Done."

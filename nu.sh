@@ -1,13 +1,25 @@
 sudo apt update
-sudo apt install python3
-sudo apt install libffi-dev
-sudo apt install python3-dev
-sudo apt install python3-virtualenv
-sudo apt-get install python3-venv
-sudo apt-get install python3-dev
 
-python3 -m venv ./nucypher-venv
+
+sudo apt install python3
+apt install python3-pip
+ln -s /usr/bin/python3 /usr/bin/python
+ln -s /usr/bin/pip3 /usr/bin/pip
+apt install libffi-dev
+apt install python3-dev
+apt install python3-virtualenv
+apt-get install python3-venv
+apt-get install python3-dev
+apt-get install gcc
+
+pip install --upgrade setuptools
+pip install wheel
+pip install cytoolz
+
+
+#python3 -m venv ./nucypher-venv
 source nucypher-venv/bin/activate
+
 pip3 install -U nucypher
 sudo apt install screen
 screen

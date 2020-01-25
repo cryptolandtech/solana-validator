@@ -25,7 +25,6 @@ sudo apt install screen
 screen
 #And create a new console by pressing ctrl+a and c. 
 #View available consoles ctrl+a and w. select console ctrl+a and "console number".
-source nucypher-venv/bin/activate
 
 #in each screen
 source nucypher-venv/bin/activate

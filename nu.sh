@@ -5,9 +5,6 @@ add-apt-repository -y ppa:ethereum/ethereum
 apt-get update
 apt-get install -y ethereum
 
-ln -s /usr/bin/python3 /usr/bin/python
-ln -s /usr/bin/pip3 /usr/bin/pip
-
 pip install --upgrade setuptools
 pip install wheel cytoolz pm
 
@@ -33,6 +30,8 @@ personal.newAccount()
 eth.accounts
 web3.toChecksumAddress(eth.accounts[0])
 web3.toChecksumAddress(eth.accounts[1])
+eth.syncing
+
 exit
 
 #Link for requesting a test ETH https://goerli-faucet.slock.it/

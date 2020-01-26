@@ -6,7 +6,7 @@ apt-get update
 apt-get install -y ethereum
 
 pip install --upgrade setuptools
-pip install wheel cytoolz pm
+pip install wheel cytoolz npm
 
 #python3 -m venv ./nucypher-venv
 #source nucypher-venv/bin/activate

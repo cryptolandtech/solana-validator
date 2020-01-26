@@ -14,7 +14,6 @@ pip install wheel cytoolz pm
 #python3 -m venv ./nucypher-venv
 #source nucypher-venv/bin/activate
 #pip3 install -U nucypher
-#sudo apt install screen
 
 screen
 #And create a new console by pressing ctrl+a and c. 

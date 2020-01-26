@@ -9,10 +9,7 @@ ln -s /usr/bin/python3 /usr/bin/python
 ln -s /usr/bin/pip3 /usr/bin/pip
 
 pip install --upgrade setuptools
-pip install wheel
-pip install cytoolz
-apt install npm
-
+pip install wheel cytoolz pm
 
 #python3 -m venv ./nucypher-venv
 #source nucypher-venv/bin/activate

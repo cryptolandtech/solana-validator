@@ -1,9 +1,9 @@
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 apt update
-apt install python3 python3-pip libffi-dev python3-dev python3-virtualenv python3-venv python3-dev gcc nodejs python-dev software-properties-common
+apt install -y python3 python3-pip libffi-dev python3-dev python3-virtualenv python3-venv python3-dev gcc nodejs python-dev software-properties-common
 add-apt-repository -y ppa:ethereum/ethereum
 apt-get update
-apt-get install ethereum
+apt-get install -y ethereum
 
 ln -s /usr/bin/python3 /usr/bin/python
 ln -s /usr/bin/pip3 /usr/bin/pip

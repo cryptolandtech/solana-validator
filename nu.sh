@@ -48,6 +48,15 @@ nucypher stake list
 
 
 #Worker
+
+#install docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+apt update
+apt-cache policy docker-ce
+apt install docker-ce
+systemctl status docker
+
 nucypher ursula init --provider ipc:///home/<your_username>/.ethereum/goerli/geth.ipc --poa --network cassandra --staker-address <your staker address>
 nucypher stake set-worker
 
@@ -56,12 +65,7 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt update
 sudo apt install apt-transport-https ca-certificates curl software-properties-common python nodejs
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
-sudo apt update
-apt-cache policy docker-ce
-sudo apt install docker-ce
-sudo systemctl status docker
-sudo usermod -aG docker ${USER}
+
+
 
 

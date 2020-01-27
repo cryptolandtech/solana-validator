@@ -57,9 +57,9 @@ apt-cache policy docker-ce
 apt install docker-ce
 systemctl status docker
 
-nucypher ursula init --provider ipc:///home/<your_username>/.ethereum/goerli/geth.ipc --poa --network cassandra --staker-address <your staker address>
+nucypher ursula init --provider ipc:///root/.ethereum/goerli/geth.ipc --poa --network cassandra --staker-address <your staker address>
 
-nucypher ursula run --teacher discover.nucypher.network:9151 --interactive
+nucypher ursula run --interactive
 
 export NUCYPHER_KEYRING_PASSWORD=<YOUR KEYRING_PASSWORD>
 export NUCYPHER_WORKER_ETH_PASSWORD=<YOUR WORKER ETH ACCOUNT PASSWORD>

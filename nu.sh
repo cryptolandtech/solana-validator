@@ -45,7 +45,7 @@ nucypher stake init-stakeholder --provider ipc:///root/.ethereum/goerli/geth.ipc
 nucypher stake create
 nucypher stake restake --enable
 nucypher stake list
-
+nucypher stake set-worker
 
 #Worker
 

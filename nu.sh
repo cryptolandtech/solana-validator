@@ -58,14 +58,16 @@ apt install docker-ce
 systemctl status docker
 
 nucypher ursula init --provider ipc:///home/<your_username>/.ethereum/goerli/geth.ipc --poa --network cassandra --staker-address <your staker address>
-nucypher stake set-worker
 
 nucypher ursula run --teacher discover.nucypher.network:9151 --interactive
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-sudo apt update
-sudo apt install apt-transport-https ca-certificates curl software-properties-common python nodejs
 
+export NUCYPHER_KEYRING_PASSWORD=<YOUR KEYRING_PASSWORD>
+export NUCYPHER_WORKER_ETH_PASSWORD=<YOUR WORKER ETH ACCOUNT PASSWORD>
 
+# Interactive Ursula-Worker Initialization
+docker run -it -v ~/.ethereum:/root/.ethereum -v ~/.local/share/nucypher:/root/.local/share/nucypher -e NUCYPHER_KEYRING_PASSWORD nucypher:latest nucypher ursula init --provider file:///root/.ethereum/goerli/geth.ipc --staker-address <YOUR STAKING ADDRESS> --network <NETWORK_NAME>
 
+# Daemonized Ursula
+docker run -d -v ~/.ethereum:/root/.ethereum -v ~/.local/share/nucypher:/root/.local/share/nucypher -p 9151:9151 -e NUCYPHER_KEYRING_PASSWORD -e NUCYPHER_WORKER_ETH_PASSWORD nucypher/nucypher:latest nucypher ursula run
 
 

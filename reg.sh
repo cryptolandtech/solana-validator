@@ -14,7 +14,8 @@ make install
 xrnd version --long
 xrncli version --long
 
-
+https://github.com/regen-network/testnets
+https://github.com/regen-network/testnets/blob/master/algradigon-1/upgrades/papua-upgrade-guide.md#configure-papua-upgrade
 
 
 

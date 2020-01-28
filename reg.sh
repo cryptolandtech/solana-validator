@@ -36,6 +36,29 @@ systemctl start xrnd
 journalctl -u xrnd -f --lines 50
 
 
+xrncli keys show moonlet --bech=val
+xrncli keys show moonlet
+
+xrncli q account xrn:1czqefutujemr7cat6jxyvkeht26jkn2mdwf4z9 --chain-id algradigon-1
+
+xrnd tendermint show-validator
+xrnd tendermint show-address
+
+xrncli tx staking create-validator --amount=4tree --pubkey=$(xrnd tendermint show-validator) \
+  --moniker="Moonlet" \
+  --chain-id=algradigon-1 \
+  --commission-rate="0.03" \
+  --commission-max-rate="0.20" \
+  --commission-max-change-rate="0.01" \
+  --min-self-delegation="1" \
+  --gas="auto" \
+  --gas-prices="0.0001tree" \
+  --from=moonlet
+
+
+
+
+
 
 
 

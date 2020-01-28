@@ -5,18 +5,12 @@
 #cosmosvaloper  Cosmos Validator Operator Address
 #cosmosvaloperpub  Cosmos Validator Operator Public Key
 
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH
-echo "export GOPATH=$HOME/go" >> ~/.bashrc
-echo "export PATH=$GOPATH/bin:$PATH" >> ~/.bashrc
-#source ~/.bashrc
+apt-get install gcc g++
+wget https://raw.githubusercontent.com/jim380/node_tooling/master/Cosmos/CLI/go_install.sh
+chmod +x go_install.sh
+./go_install.sh -v 1.12.5
 
-sudo add-apt-repository ppa:longsleep/golang-backports
-sudo apt-get update
-sudo apt upgrade -y
-#go 1.13
-sudo apt-get install -y golang-go make gcc python jq liblz4-tool npm
-sudo npm install pm2@latest -g
+
 
 #Install regen
 mkdir -p $GOPATH/src/github.com/regen

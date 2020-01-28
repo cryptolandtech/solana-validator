@@ -1,21 +1,13 @@
-#cosmos  Cosmos Account Address
-#cosmospub  Cosmos Account Public Key
-#cosmosvalcons  Cosmos Validator Consensus Address
-#cosmosvalconspub  Cosmos Validator Consensus Public Key
-#cosmosvaloper  Cosmos Validator Operator Address
-#cosmosvaloperpub  Cosmos Validator Operator Public Key
 
-apt-get install gcc g++
+apt-get install gcc g++ build-essential
 wget https://raw.githubusercontent.com/jim380/node_tooling/master/Cosmos/CLI/go_install.sh
 chmod +x go_install.sh
 ./go_install.sh -v 1.12.5
 
-
-
 #Install regen
 mkdir -p $GOPATH/src/github.com/regen
 cd $GOPATH/src/github.com/regen
-git clone -b v0.5.0 https://github.com/regen-network/regen-ledger
+git clone -b v0.5.2 https://github.com/regen-network/regen-ledger
 cd regen-ledger
 make install
 
@@ -24,6 +16,19 @@ xrncli version --long
 
 
 
+
+
+
+
+
+
+
+#cosmos  Cosmos Account Address
+#cosmospub  Cosmos Account Public Key
+#cosmosvalcons  Cosmos Validator Consensus Address
+#cosmosvalconspub  Cosmos Validator Consensus Public Key
+#cosmosvaloper  Cosmos Validator Operator Address
+#cosmosvaloperpub  Cosmos Validator Operator Public Key
 
 git clone https://github.com/cosmos/cosmos-sdk.git
 cd cosmos-sdk

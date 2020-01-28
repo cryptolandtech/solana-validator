@@ -1,12 +1,12 @@
 cat <<EOF | sudo tee /etc/apt/sources.list.d/influxdata.list
 deb https://repos.influxdata.com/ubuntu bionic stable
 EOF
-sudo curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
-sudo apt-get update
-sudo apt-get -y install telegraf
-sudo systemctl restart telegraf
-sudo systemctl enable --now telegraf
-sudo systemctl status telegraf
+curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+apt-get update
+apt-get -y install telegraf
+systemctl restart telegraf
+systemctl enable --now telegraf
+systemctl status telegraf
 
 
 

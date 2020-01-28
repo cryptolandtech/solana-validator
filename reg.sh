@@ -44,17 +44,8 @@ xrncli q account xrn:1czqefutujemr7cat6jxyvkeht26jkn2mdwf4z9 --chain-id algradig
 xrnd tendermint show-validator
 xrnd tendermint show-address
 
-xrncli tx staking create-validator --amount=4tree --pubkey=$(xrnd tendermint show-validator) \
-  --moniker="Moonlet" \
-  --chain-id=algradigon-1 \
-  --commission-rate="0.03" \
-  --commission-max-rate="0.20" \
-  --commission-max-change-rate="0.01" \
-  --min-self-delegation="1" \
-  --gas="auto" \
-  --gas-prices="0.0001tree" \
-  --from=moonlet
 
+xrncli tx staking create-validator --amount=9000000utree --pubkey=$(xrnd tendermint show-validator)   --moniker="Moonlet"   --chain-id=algradigon-1   --commission-rate="0.03"   --commission-max-rate="0.20"   --commission-max-change-rate="0.01"   --min-self-delegation="1"   --gas="auto"  --from=moonlet
 
 
 

@@ -44,3 +44,18 @@ telegraf.conf
   urls = [ "http://IP:8086" ]
   username = ""
   password = ""
+  
+#to use docker
+#--label="docker.group=nuw-st" add this when doing docker run
+
+[[inputs.docker]]
+  endpoint = "unix:///var/run/docker.sock"
+  gather_services = false
+  container_name_include = []
+  container_name_exclude = []
+  timeout = "5s"
+  docker_label_include = ["nuw-st"]
+  docker_label_exclude = []
+  perdevice = true
+  total = false
+

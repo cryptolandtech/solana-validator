@@ -14,11 +14,26 @@ make install
 xrnd version --long
 xrncli version --long
 
+
+
+ xrnd init --chain-id=algradigon-1 Moonlet
+ xrncli keys add moonlet
+
+#get genesis
+curl https://raw.githubusercontent.com/regen-network/testnets/master/algradigon-1/genesis.json > $HOME/.xrnd/config/genesis.json
+
+#add peers
+vi $HOME/.xrnd/config/config.toml
+#seeds = "15ee12ae5fe8256ee94d1065e0000893e52532d9@regen-seed-eu.chorus.one:36656,ca130fd7ca16a957850a96ee9bdb74a351c4929f@regen-seed-us.chorus.one:36656"
+
+ulimit -n 4096
+
 https://github.com/regen-network/testnets
 https://github.com/regen-network/testnets/blob/master/algradigon-1/upgrades/papua-upgrade-guide.md#configure-papua-upgrade
 
-
-
+systemctl enable xrnd
+systemctl start xrnd
+journalctl -u xrnd -f --lines 50
 
 
 

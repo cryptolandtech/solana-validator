@@ -47,8 +47,11 @@ xrnd tendermint show-address
 
 xrncli tx staking create-validator --amount=9000000utree --pubkey=$(xrnd tendermint show-validator)   --moniker="Moonlet"   --chain-id=algradigon-1   --commission-rate="0.03"   --commission-max-rate="0.20"   --commission-max-change-rate="0.01"   --min-self-delegation="1"   --gas="auto"  --from=moonlet
 
+#see votes
+xrncli query gov votes 4 --chain-id algradigon-1 -o json --node localhost:26657|jq
 
-
+#vote to proposal 4
+xrncli tx gov vote 4 yes --from=moonlet --trust-node --node=localhost:26657 --chain-id=algradigon-1
 
 
 

@@ -13,7 +13,7 @@ sudo npm install -g @celo/celocli
 
 
 export CELO_IMAGE=us.gcr.io/celo-testnet/celo-node:baklava
-export NETWORK_ID=12219
+export NETWORK_ID=200110
 
 docker pull $CELO_IMAGE
 

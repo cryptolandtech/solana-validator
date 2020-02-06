@@ -1,0 +1,21 @@
+General System Security
+-----------
+sudo apt update && sudo apt upgrade
+
+https://www.cyberciti.biz/faq/how-to-set-up-automatic-updates-for-ubuntu-linux-18-04/
+sudo apt install unattended-upgrades apt-listchanges bsd-mailx
+sudo dpkg-reconfigure -plow unattended-upgrades
+vi /etc/apt/apt.conf.d/50unattended-upgrades; Unattended-Upgrade::Automatic-Reboot "false";
+sudo unattended-upgrades --dry-run
+
+
+apt install -y libpam-cracklib 
+vim /etc/pam.d/common-password 
+password        requisite     pam_cracklib.so try_first_pass retry=3 minlen=8 dcredit=0 ucredit=1 ocredit=0 lcredit=0
+
+
+vi /etc/ssh/sshd_config
+
+AllowUsers celo
+AllowGroups celo
+

@@ -28,6 +28,23 @@ chmod 750 /home/celo
 echo 'fs.suid_dumpable = 0' >> /etc/sysctl.conf
 sysctl -p
 
-
-
 apt remove binutils-x86-64-linux-gnu gcc; apt autoremove
+
+vi /etc/ssh/sshd_config
+AllowTcpForwarding no
+ClientAliveCountMax 2
+Compression no
+LogLevel VERBOSE
+MaxAuthTries 3
+MaxSessions 2
+TCPKeepAlive no
+X11Forwarding no
+AllowAgentForwarding no
+
+service ssh restart
+
+apt install rkhunter -y
+ 
+apt install auditd debsums apt-show-versions
+
+Change ssh port +  allow ufw

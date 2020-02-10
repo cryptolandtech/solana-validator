@@ -28,3 +28,6 @@ chmod 750 /home/celo
 echo 'fs.suid_dumpable = 0' >> /etc/sysctl.conf
 sysctl -p
 
+
+
+apt remove binutils-x86-64-linux-gnu gcc; apt autoremove

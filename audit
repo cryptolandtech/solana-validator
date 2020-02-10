@@ -56,3 +56,11 @@ WARNING: This computer system including all related equipment, network devices (
 umask 027
 
 sudo apt-get purge $(dpkg -l | grep '^rc' | awk '{print $2}')
+
+vi /etc/modprobe.d/blacklist.conf
+install cramfs /bin/true
+install freevxfs /bin/true
+install hfs /bin/true
+install hfsplus /bin/true
+install jffs2 /bin/true
+install udf /bin/true

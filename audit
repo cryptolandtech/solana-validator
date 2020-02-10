@@ -19,3 +19,4 @@ vi /etc/ssh/sshd_config
 AllowUsers celo
 AllowGroups celo
 
+chmod 750 /etc/sudoers

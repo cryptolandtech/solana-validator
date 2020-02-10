@@ -20,3 +20,11 @@ AllowUsers celo
 AllowGroups celo
 
 chmod 750 /etc/sudoers
+chmod 750 /home/celo
+
+
+vi /boot/grub/grub.cfg
+*               hard    core             0
+echo 'fs.suid_dumpable = 0' >> /etc/sysctl.conf
+sysctl -p
+

@@ -45,7 +45,9 @@ service ssh restart
 
 apt install rkhunter -y
  
-apt install usbguard debsums apt-show-versions
+apt install usbguard debsums apt-show-versions sysstat
+systemctl start sysstat
+systemctl enable sysstat
 
 Change ssh port +  allow ufw
 
@@ -129,3 +131,5 @@ echo 0 > /sys/bus/usb/devices/usb1/authorized
 
 https://www.cyberciti.biz/faq/linux-disable-modprobe-loading-of-usb-storage-driver/
 
+apt remove binutils-x86-64-linux-gnu; apt autoremove
+sudo apt-get purge $(dpkg -l | grep '^rc' | awk '{print $2}')

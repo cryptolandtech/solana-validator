@@ -45,7 +45,7 @@ service ssh restart
 
 apt install rkhunter -y
  
-apt install auditd debsums apt-show-versions
+apt install debsums apt-show-versions
 
 Change ssh port +  allow ufw
 

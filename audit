@@ -45,7 +45,7 @@ service ssh restart
 
 apt install rkhunter -y
  
-apt install debsums apt-show-versions
+apt install usbguard debsums apt-show-versions
 
 Change ssh port +  allow ufw
 
@@ -69,3 +69,63 @@ blacklist usb-storage
 vi /etc/usbguard/usbguard-daemon.conf 
 PresentControllerPolicy=block
 PresentDevicePolicy=block
+
+systemctl restart usbguard
+
+ echo 0 > /sys/bus/usb/devices/usb1/authorized
+ echo 0 > /sys/bus/usb/devices/usb2/authorized
+ echo 0 > /sys/bus/usb/devices/usb3/authorized
+ echo 0 > /sys/bus/usb/devices/usb4/authorized
+
+
+
+https://www.techrepublic.com/article/how-to-password-protect-the-grub-boot-loader-in-ubuntu/
+sysctl.conf:
+fs.suid_dumpable=0
+kernel.core_uses_pid=1
+kernel.dmesg_restrict=1
+kernel.kptr_restrict=2
+kernel.sysrq=0
+### BE carefull. If you disable for validator docker won't work anymore
+net.ipv4.conf.all.forwarding=1
+net.ipv4.conf.all.log_martians=1
+net.ipv4.conf.all.send_redirects=0
+net.ipv4.conf.default.accept_source_route=0
+net.ipv4.conf.default.log_martians=1
+net.ipv4.conf.all.accept_redirects=0
+
+
+
+chmod 750 /etc/sudoers.d/ 
+apt install apparmor apt-show-versions
+
+  sudo apt install clamav acct aide arpwatch  usbguard -y
+sudo touch /var/lib/aide/aide.db
+chmod 750 /etc/sudoers.d/
+sudo aide --config=/usr/share/aide/config/aide/aide.conf --check
+
+
+cd /etc; chmod o-rx,g-rx cron.monthly cron.hourly cron.weekly cron.daily cron.d at.deny crontab
+
+Se ruleaza si se executa ce vrea 
+grpck   
+#Vei avea dastea: 'mabalaru' is a member of the 'docker' group in /etc/group but not in /etc/gshadow
+#trebuie sa intri in /etc.shaddow si sa-l bagi in grup 
+
+echo "umask 077" >> /etc/profile
+echo "* hard core 0" >> /etc/security/limits.conf
+
+
+
+#Comanda asta arata userii care au shell. Trebuie sa iei fiecare user la mana si sa-i spui sa expire parola
+getent passwd | grep -f /etc/shells | tr ',' ':' | awk -F: '{print $1, $5}' |     xargs -L1 bash -c 'echo ${@:2}:$(chage -l $1| awk -F": " "/Password expires/{print \$2}")' : |     column -ts:
+
+chage -M 9999 USERI
+
+
+
+echo 0 > /sys/bus/usb/devices/usb2/authorized
+echo 0 > /sys/bus/usb/devices/usb1/authorized
+
+https://www.cyberciti.biz/faq/linux-disable-modprobe-loading-of-usb-storage-driver/
+

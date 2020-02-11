@@ -65,3 +65,7 @@ install hfsplus /bin/true
 install jffs2 /bin/true
 install udf /bin/true
 blacklist usb-storage
+
+vi /etc/usbguard/usbguard-daemon.conf 
+PresentControllerPolicy=block
+PresentDevicePolicy=block

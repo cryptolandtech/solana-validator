@@ -71,3 +71,8 @@ docker run -it -v ~/.ethereum:/root/.ethereum -v ~/.local/share/nucypher:/root/.
 docker run -d -v ~/.ethereum:/root/.ethereum -v ~/.local/share/nucypher:/root/.local/share/nucypher -p 9151:9151 -e NUCYPHER_KEYRING_PASSWORD -e NUCYPHER_WORKER_ETH_PASSWORD nucypher/nucypher:latest nucypher ursula run
 
 # https://IP:9151/status
+
+
+#phaes2
+nucypher stake restake --disable
+nucypher stake windown --enable

@@ -9,3 +9,11 @@ apt-cache policy docker-ce
 sudo apt install docker-ce
 sudo systemctl status docker
 sudo usermod -aG docker ${USER}
+
+
+#get private key
+heimdalld show-privatekey
+
+#show address
+heimdalld show-account
+

@@ -73,6 +73,12 @@ docker run -d -v ~/.ethereum:/root/.ethereum -v ~/.local/share/nucypher:/root/.l
 # https://IP:9151/status
 
 
-#phaes2
+#phase2
 nucypher stake restake --disable
 nucypher stake windown --enable
+
+nucypher stake list
+
+nucypher stake accounts
+
+

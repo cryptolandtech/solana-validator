@@ -81,4 +81,20 @@ nucypher stake list
 
 nucypher stake accounts
 
+geth attach /root/.ethereum/goerli/geth.ipc
+eth.accounts
 
+nucypher status stakers --provider ~/.ethereum/goerli/geth.ipc --poa --network cassandra --staking-address 0xfa9a7330cad89ffb6fed36adda7fba19f8a3e927
+nucypher stake collect-reward --staking-reward
+nucypher stake collect-reward --policy-reward
+
+nucypher stake winddown --disable
+nucypher stake divide
+nucypher stake prolong
+nucypher stake detach-worker 
+nucypher stake set-worker
+
+
+nucypher ursula destroy
+nucypher ursula init
+nucypher ursula run

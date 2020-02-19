@@ -103,4 +103,7 @@ nucypher ursula run
 #phase 3
 nucypher status stakers --provider ~/.ethereum/goerli/geth.ipc --poa --network cassandra --staking-address 0xfa9a7330cad89ffb6fed36adda7fba19f8a3e927
 
-
+#bid status
+nucypher worklock status --network cassandra --provider ~/.ethereum/goerli/geth.ipc --poa --bidder-address 0xfa9a7330cad89ffb6fed36adda7fba19f8a3e927
+#place bid
+nucypher worklock bid --network cassandra --provider ~/.ethereum/goerli/geth.ipc --poa

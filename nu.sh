@@ -98,3 +98,9 @@ nucypher stake set-worker
 nucypher ursula destroy
 nucypher ursula init
 nucypher ursula run
+
+
+#phase 3
+nucypher status stakers --provider ~/.ethereum/goerli/geth.ipc --poa --network cassandra --staking-address 0xfa9a7330cad89ffb6fed36adda7fba19f8a3e927
+
+

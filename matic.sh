@@ -17,3 +17,8 @@ heimdalld show-privatekey
 #show address
 heimdalld show-account
 
+#catchup?
+curl http://localhost:26657/status|grep catching
+
+#show block nb
+curl http://localhost:26657/block

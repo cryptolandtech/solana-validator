@@ -1,8 +1,7 @@
-
-apt-get install gcc g++ build-essential
-wget https://raw.githubusercontent.com/jim380/node_tooling/master/Cosmos/CLI/go_install.sh
-chmod +x go_install.sh
-./go_install.sh -v 1.12.5
+sudo add-apt-repository ppa:longsleep/golang-backports
+sudo apt upgrade -y
+#go 1.13
+sudo apt-get install -y golang-go make gcc python jq g++ build-essential
 
 #Install regen
 mkdir -p $GOPATH/src/github.com/regen
